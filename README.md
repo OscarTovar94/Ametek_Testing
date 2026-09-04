@@ -8,7 +8,7 @@ es asegurar la calidad del producto, verificar el cumplimiento de los criterios 
 un registro de los resultados obtenidos de cada unidad inspeccionada, garantizando una trazabilidad completa.
 ---------------------------------------------------------------------------------------------------
 
-Historial de Revisiones
+# Historial de Revisiones
 
 Rev 1.0 - 23/06/2026
 - Creación inicial de la aplicación.
@@ -18,5 +18,9 @@ Rev 1.0 - 23/06/2026
 - Ejecución semiautomática de pruebas GTSOC.
 - Generación de reporte TXT.
 - Visualización de instrucciones e imágenes.
+
+Rev 2.0 - 04/09/2026
+- Inicio me prueba con pedal.
+- Para detectar la entrada del pedal se utilizara una DAQ "NI USB-6001".
 
 ---------------------------------------------------------------------------------------------------

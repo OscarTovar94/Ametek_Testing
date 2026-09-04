@@ -14,7 +14,6 @@ import win32api
 import winerror
 import serial
 from PIL import Image, ImageTk
-import nidaqmx
 
 mutex = win32event.CreateMutex(None, False, "Ametek_Testing")
 last_error = win32api.GetLastError()
@@ -112,7 +111,6 @@ def testspec_gtsoc(seccion, clave):
 
 DMM = None
 PSU = None
-CANAL_START = "Dev1/port0/line0"
 
 
 def abrir_equipos():
@@ -152,62 +150,6 @@ def cerrar_puertos():
     if PSU is not None and PSU.is_open:
         PSU.write(b"OUT0\n")
         PSU.close()
-
-
-def esperar_entrada_daq(root, callback, canal=CANAL_START):
-    """
-    Espera una nueva activación 0 -> 1 en una entrada digital.
-
-    Si la entrada ya estaba activa antes de llamar esta función,
-    NO ejecuta el callback hasta que primero vuelva a 0 y después
-    se active nuevamente.
-    """
-
-    task = nidaqmx.Task()
-    task.di_channels.add_di_chan(canal)
-
-    estado_inicial = bool(task.read())
-
-    # Si al empezar ya está en HIGH, primero obligamos a que sea liberada.
-    esperando_liberacion = estado_inicial
-
-    def revisar():
-        nonlocal esperando_liberacion
-
-        try:
-            estado = bool(task.read())
-
-            # --------------------------------------------
-            # Entrada ya estaba activada cuando empezamos
-            # --------------------------------------------
-            if esperando_liberacion:
-
-                if not estado:
-                    # Ya fue liberada.
-                    # A partir de ahora esperamos un nuevo HIGH.
-                    esperando_liberacion = False
-
-                root.after(30, revisar)
-                return
-
-            # --------------------------------------------
-            # Entrada armada y esperando nueva activación
-            # --------------------------------------------
-            if estado:
-                task.close()
-                callback()
-                return
-
-            root.after(30, revisar)
-
-        except Exception as e:
-            task.close()
-            messagebox.showerror(
-                "Error DAQ",
-                f"No se pudo leer la entrada digital:\n{e}"
-            )
-
-    root.after(30, revisar)
 
 
 class VentanaLogin:
@@ -635,7 +577,7 @@ class TestingGTAO:
             """Instrucciones para la conexión de la PCBA"""
             root.focus_set()
             Instrucciones.config(
-                text="Precaución\nConecta los cables/arneses en la PCBA según la WI y presiona el pedal para iniciar.", bg="#FFC7CE")
+                text="Precaución\nConecta los cables/arneses en la PCBA según la WI y presiona la barra espaciadora para iniciar.", bg="#FFC7CE")
 
             root.bind("<space>", test_10_gtao)
 
@@ -644,7 +586,7 @@ class TestingGTAO:
             label_resultado.config(text="En proceso...",
                                    bg="#FFEB9C", fg="#9C5700")
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_1_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_1_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_1(event=None):
                 Instrucciones.config(
@@ -685,15 +627,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_1,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_1)
 
         def test_2_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_2_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_2_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_2(event=None):
                 Instrucciones.config(
@@ -726,15 +664,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_2,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_2)
 
         def test_3_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_3_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_3_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_3(event=None):
                 Instrucciones.config(
@@ -767,15 +701,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_3,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_3)
 
         def test_4_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_4_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_4_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_4(event=None):
                 Instrucciones.config(
@@ -808,15 +738,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_4,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_4)
 
         def test_5_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_5_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_5_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_5(event=None):
                 Instrucciones.config(
@@ -849,15 +775,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_5,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_5)
 
         def test_6_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_6_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_6_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_6(event=None):
                 Instrucciones.config(
@@ -890,15 +812,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_6,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_6)
 
         def test_7_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_7_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_7_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_7(event=None):
                 Instrucciones.config(
@@ -931,15 +849,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_7,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_7)
 
         def test_8_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_8_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_8_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_8(event=None):
                 Instrucciones.config(
@@ -972,15 +886,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_8,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_8)
 
         def test_9_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_9_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_9_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_9(event=None):
                 Instrucciones.config(
@@ -1013,15 +923,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_9,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_9)
 
         def test_10_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_10_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_10_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_10(event=None):
                 Instrucciones.config(
@@ -1069,11 +975,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_10, CANAL_START)
+            root.bind("<space>", inicio_test_10)
 
         def test_11_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_11_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_11_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_11(event=None):
                 Instrucciones.config(
@@ -1107,11 +1013,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_11, CANAL_START)
+            root.bind("<space>", inicio_test_11)
 
         def test_12_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_12_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_12_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_12(event=None):
                 Instrucciones.config(
@@ -1145,11 +1051,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_12, CANAL_START)
+            root.bind("<space>", inicio_test_12)
 
         def test_13_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_13_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_13_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_13(event=None):
                 Instrucciones.config(
@@ -1183,11 +1089,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_13, CANAL_START)
+            root.bind("<space>", inicio_test_13)
 
         def test_14_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_14_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_14_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_14(event=None):
                 Instrucciones.config(
@@ -1221,11 +1127,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_14, CANAL_START)
+            root.bind("<space>", inicio_test_14)
 
         def test_15_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_15_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_15_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_15(event=None):
                 Instrucciones.config(
@@ -1259,11 +1165,11 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_15, CANAL_START)
+            root.bind("<space>", inicio_test_15)
 
         def test_16_gtao(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_16_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_16_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_16(event=None):
                 Instrucciones.config(
@@ -1297,7 +1203,7 @@ class TestingGTAO:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_16, CANAL_START)
+            root.bind("<space>", inicio_test_16)
 
         def test_fail(event=None):
             """En caso de falla en algún test, esta función permitirá reiniciar la prueba"""
@@ -1867,7 +1773,7 @@ class TestingGTSOC:
             """Instrucciones para la conexión de la PCBA"""
             root.focus_set()
             Instrucciones.config(
-                text="Precaución\nConecta los cables/arneses en la PCBA según la WI y presiona el pedal para iniciar.", bg="#FFC7CE")
+                text="Precaución\nConecta los cables/arneses en la PCBA según la WI y presiona la barra espaciadora para iniciar.", bg="#FFC7CE")
 
             root.bind("<space>", test_14_gtsoc)
 
@@ -1876,7 +1782,7 @@ class TestingGTSOC:
             label_resultado.config(text="En proceso...",
                                    bg="#FFEB9C", fg="#9C5700")
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_1_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_1_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_1(event=None):
                 Instrucciones.config(
@@ -1917,15 +1823,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_1,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_1)
 
         def test_2_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_2_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_2_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_2(event=None):
                 Instrucciones.config(
@@ -1958,11 +1860,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_2, CANAL_START)
+            root.bind("<space>", inicio_test_2)
 
         def test_3_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_3_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_3_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_3(event=None):
                 Instrucciones.config(
@@ -1995,15 +1897,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(
-                root,
-                inicio_test_3,
-                CANAL_START
-            )
+            root.bind("<space>", inicio_test_3)
 
         def test_4_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_4_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_4_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_4(event=None):
                 Instrucciones.config(
@@ -2036,11 +1934,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_4, CANAL_START)
+            root.bind("<space>", inicio_test_4)
 
         def test_5_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_5_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_5_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_5(event=None):
                 Instrucciones.config(
@@ -2073,11 +1971,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_5, CANAL_START)
+            root.bind("<space>", inicio_test_5)
 
         def test_6_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_6_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_6_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_6(event=None):
                 Instrucciones.config(
@@ -2110,11 +2008,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_6, CANAL_START)
+            root.bind("<space>", inicio_test_6)
 
         def test_7_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_7_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_7_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_7(event=None):
                 Instrucciones.config(
@@ -2147,11 +2045,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_7, CANAL_START)
+            root.bind("<space>", inicio_test_7)
 
         def test_8_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_8_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_8_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_8(event=None):
                 Instrucciones.config(
@@ -2184,11 +2082,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_8, CANAL_START)
+            root.bind("<space>", inicio_test_8)
 
         def test_9_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_9_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_9_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_9(event=None):
                 Instrucciones.config(
@@ -2221,11 +2119,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_9, CANAL_START)
+            root.bind("<space>", inicio_test_9)
 
         def test_10_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_10_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_10_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_10(event=None):
                 Instrucciones.config(
@@ -2258,11 +2156,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_10, CANAL_START)
+            root.bind("<space>", inicio_test_10)
 
         def test_11_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_11_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_11_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_11(event=None):
                 Instrucciones.config(
@@ -2295,11 +2193,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_11, CANAL_START)
+            root.bind("<space>", inicio_test_11)
 
         def test_12_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_12_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_12_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_12(event=None):
                 Instrucciones.config(
@@ -2332,11 +2230,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_12, CANAL_START)
+            root.bind("<space>", inicio_test_12)
 
         def test_13_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_13_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_13_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_13(event=None):
                 Instrucciones.config(
@@ -2369,11 +2267,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_13, CANAL_START)
+            root.bind("<space>", inicio_test_13)
 
         def test_14_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_14_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_14_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_14(event=None):
                 Instrucciones.config(
@@ -2421,11 +2319,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_14, CANAL_START)
+            root.bind("<space>", inicio_test_14)
 
         def test_15_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_15_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_15_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_15(event=None):
                 Instrucciones.config(
@@ -2459,11 +2357,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_15, CANAL_START)
+            root.bind("<space>", inicio_test_15)
 
         def test_16_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_16_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_16_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_16(event=None):
                 Instrucciones.config(
@@ -2497,11 +2395,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_16, CANAL_START)
+            root.bind("<space>", inicio_test_16)
 
         def test_17_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_17_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_17_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_17(event=None):
                 Instrucciones.config(
@@ -2535,11 +2433,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_17, CANAL_START)
+            root.bind("<space>", inicio_test_17)
 
         def test_18_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_18_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_18_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_18(event=None):
                 Instrucciones.config(
@@ -2573,11 +2471,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_18, CANAL_START)
+            root.bind("<space>", inicio_test_18)
 
         def test_19_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_19_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_19_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_19(event=None):
                 Instrucciones.config(
@@ -2611,11 +2509,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_19, CANAL_START)
+            root.bind("<space>", inicio_test_19)
 
         def test_20_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_20_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_20_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_20(event=None):
                 Instrucciones.config(
@@ -2649,11 +2547,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_20, CANAL_START)
+            root.bind("<space>", inicio_test_20)
 
         def test_21_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_21_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_21_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_21(event=None):
                 Instrucciones.config(
@@ -2687,11 +2585,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_21, CANAL_START)
+            root.bind("<space>", inicio_test_21)
 
         def test_22_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_22_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_22_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_22(event=None):
                 Instrucciones.config(
@@ -2725,11 +2623,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_22, CANAL_START)
+            root.bind("<space>", inicio_test_22)
 
         def test_23_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_23_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_23_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_23(event=None):
                 Instrucciones.config(
@@ -2763,11 +2661,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_23, CANAL_START)
+            root.bind("<space>", inicio_test_23)
 
         def test_24_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_24_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_24_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_24(event=None):
                 Instrucciones.config(
@@ -2801,11 +2699,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_24, CANAL_START)
+            root.bind("<space>", inicio_test_24)
 
         def test_25_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_25_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_25_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_25(event=None):
                 Instrucciones.config(
@@ -2839,11 +2737,11 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_25, CANAL_START)
+            root.bind("<space>", inicio_test_25)
 
         def test_26_gtsoc(event=None):
             Instrucciones.config(
-                text=f"Coloque la punta roja del multímetro en el pin de {test_26_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
+                text=f"Coloque la punta roja del multímetro en el pin de {test_26_name} y la punta negra a tierra según la WI y presiona la barra espaciadora para iniciar", bg="SystemButtonFace", fg="blue")
 
             def inicio_test_26(event=None):
                 Instrucciones.config(
@@ -2877,7 +2775,7 @@ class TestingGTSOC:
                     )
                     test_fail()
 
-            esperar_entrada_daq(root, inicio_test_26, CANAL_START)
+            root.bind("<space>", inicio_test_26)
 
         def test_fail(event=None):
             """En caso de falla en algún test, esta función permitirá reiniciar la prueba"""
