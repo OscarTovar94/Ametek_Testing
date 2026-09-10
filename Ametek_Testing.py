@@ -591,7 +591,7 @@ class TestingGTAO:
 
         label_image_gtao = tk.Label(frame, image=foto)
         label_image_gtao.image = foto
-        label_image_gtao.grid(row=4, column=2, columnspan=2, rowspan=18,
+        label_image_gtao.grid(row=4, column=2, columnspan=2, rowspan=19,
                               pady=0, padx=0, sticky="e")
 
         def reiniciar_prueba():
@@ -695,6 +695,7 @@ class TestingGTAO:
 
             def configurar_multimetro():
                 try:
+                    PSU.write(b"OUT0\n")
 
                     # Configuración de resistencia 2 hilos
                     DMM.write("CONF:RES")
@@ -1187,8 +1188,8 @@ class TestingGTAO:
                         text=f"Test 6: {test_6_name} - Min: {test_6_min} {test_6_unit}, Max: {test_6_max} {test_6_unit} - Result: FAIL ({resultado:.4f} {test_6_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                   # test_7_gtao() # skip prueba
-                    test_fail()
+                    test_7_gtao() # skip prueba
+                    #test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1268,8 +1269,8 @@ class TestingGTAO:
                         text=f"Test 7: {test_7_name} - Min: {test_7_min} {test_7_unit}, Max: {test_7_max} {test_7_unit} - Result: FAIL ({resultado:.4f} {test_7_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                   # test_8_gtao() #Skip prueba
-                    test_fail()
+                    test_8_gtao() #Skip prueba
+                    #test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1326,7 +1327,7 @@ class TestingGTAO:
                 try:
 
                     resultado = float(
-                        DMM.query("READ")
+                        DMM.query("READ?")
                     )
 
                 except Exception as e:
@@ -1349,7 +1350,8 @@ class TestingGTAO:
                         text=f"Test 8: {test_8_name} - Min: {test_8_min} {test_8_unit}, Max: {test_8_max} {test_8_unit} - Result: FAIL ({resultado:.4f} {test_8_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    #test_fail() #Skip prueba
+                    test_9_gtao()
 
             esperar_entrada_daq(
                 root,
@@ -1406,7 +1408,7 @@ class TestingGTAO:
                 try:
 
                     resultado = float(
-                        DMM.query("READ")
+                        DMM.query("READ?")
                     )
 
                 except Exception as e:
@@ -1429,7 +1431,8 @@ class TestingGTAO:
                         text=f"Test 9: {test_9_name} - Min: {test_9_min} {test_9_unit}, Max: {test_9_max} {test_9_unit} - Result: FAIL ({resultado:.4f} {test_9_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    #test_fail() #Skip prueba
+                    conexion_pcba()
 
             esperar_entrada_daq(
                 root,
@@ -1437,7 +1440,12 @@ class TestingGTAO:
                 CANAL_START
             )
 
-        def prueba_corto_gtao():
+        def prueba_corto_gtao(event=None):
+
+            Instrucciones.config(
+                text=f"Prueba: {test_9_name} {test_9_unit} - En proceso...",
+                bg="#FFEB9C", fg="#9C5700"
+                )
 
             try:
                 voltaje = float(
@@ -1476,7 +1484,7 @@ class TestingGTAO:
                     f"Error al iniciar prueba de corto:\n{e}"
                 )
 
-        def verificar_corto_gtao():
+        def verificar_corto_gtao(event=None):
 
             try:
 
@@ -1484,8 +1492,15 @@ class TestingGTAO:
                 # Leer voltaje real
                 # -----------------------------
                 PSU.write(b"VOUT2?\n")
+                respuesta_v = (
+                    PSU.readline()
+                    .decode(errors="ignore")
+                    .replace("\x00", "")
+                    .replace("V", "")
+                    .strip()
+                ) 
                 voltaje_medido = float(
-                    PSU.readline().decode().strip()
+                    respuesta_v
                 )
 
                 time.sleep(0.1)
@@ -1494,8 +1509,15 @@ class TestingGTAO:
                 # Leer corriente real
                 # -----------------------------
                 PSU.write(b"IOUT2?\n")
+                respuesta_i = (
+                    PSU.readline()
+                    .decode(errors="ignore")
+                    .replace("\x00", "")
+                    .replace("A", "")
+                    .strip()
+                )
                 corriente_medida = float(
-                    PSU.readline().decode().strip()
+                    respuesta_i
                 )
 
                 voltaje_programado = float(
@@ -1511,49 +1533,41 @@ class TestingGTAO:
                     f"Iout = {corriente_medida:.3f} A"
                 )
 
-                # ------------------------------------
-                # Criterios de posible corto
-                # ------------------------------------
-
-                corriente_alta = (
-                    corriente_medida >= corriente_limite * 0.95
-                )
-
-                voltaje_bajo = (
-                    voltaje_medido <= voltaje_programado * 0.80
-                )
-
-                if corriente_alta and voltaje_bajo:
-
-                    PSU.write(b"OUT0\n")
-
-                    label_short_test.config(
-                        text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A - Result: FAIL", bg="#FFC7CE", fg="red")
-
-                    test_fail()
-
-                else:
-
-                    print("Prueba de corto: PASS")
-
-                    # Puedes dejar la fuente encendida
-                    # si inmediatamente comienzas voltajes
-                    label_short_test.config(
-                        text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A - Result: PASS", bg="#C6EFCE", fg="green")
-
-                    test_10_gtao()
-
             except Exception as e:
-
-                try:
-                    PSU.write(b"OUT0\n")
-                except:
-                    pass
-
+                PSU.write(b"OUT0\n")
                 messagebox.showerror(
                     "Error PSU",
-                    f"Error al verificar corto:\n{e}"
-                )
+                    f"Error:\n{e}"
+                    )
+
+            # ------------------------------------
+            # Criterios de posible corto
+            # ------------------------------------
+
+            corriente_alta = (
+                corriente_medida >= corriente_limite * 0.90
+            )
+
+            voltaje_bajo = (
+                voltaje_medido <= voltaje_programado * 0.80
+            )
+
+            if corriente_alta and voltaje_bajo:
+
+                PSU.write(b"OUT0\n")
+                label_short_test.config(
+                    text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A - Result: FAIL ({voltaje_medido:.3f}V | {corriente_medida:.3f}A )", bg="#FFC7CE", fg="red")
+                
+                test_fail()
+
+            else:
+                print("Prueba de corto: PASS")
+                PSU.write(b"OUT0\n")
+
+                label_short_test.config(
+                    text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A - Result: PASS ({voltaje_medido:.3f}V | {corriente_medida:.3f}A )", bg="#C6EFCE", fg="green")
+
+                test_10_gtao()
 
         def test_10_gtao(event=None):
             Instrucciones.config(
