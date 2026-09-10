@@ -700,7 +700,6 @@ class TestingGTAO:
 
             def configurar_multimetro():
                 try:
-                    PSU.write(b"OUT0\n")
 
                     # Configuración de resistencia 2 hilos
                     DMM.write("CONF:RES")
@@ -803,18 +802,6 @@ class TestingGTAO:
 
             def configurar_multimetro():
                 try:
-
-                    # Configuración de resistencia 2 hilos
-                    # DMM.write("CONF:RES")
-
-                    # Auto rango
-                    # DMM.write("RES:RANG:AUTO ON")
-
-                    # Autozero
-                    # DMM.write("RES:ZERO:AUTO ON")
-
-                    # Iniciar adquisición
-                    # DMM.write("TRIG:SOUR IMM")
 
                     delay = int(
                         testspec_gtao(
@@ -1448,7 +1435,7 @@ class TestingGTAO:
         def prueba_corto_gtao(event=None):
 
             Instrucciones.config(
-                text=f"Prueba: {test_9_name} {test_9_unit} - En proceso...",
+                text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A - En proceso...",
                 bg="#FFEB9C", fg="#9C5700"
             )
 
@@ -2651,22 +2638,59 @@ class TestingGTSOC:
 
             def configurar_multimetro():
                 try:
-                    DMM.write(b"CONF:RES\n")
-                    delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                    root.after(delay, leer_resultado)
-                except Exception:
-                    messagebox.showerror(
-                        "No encontrado",
-                        f"No se puede conectar al Multímetro y/o Fuente de Alimentación."
+
+                    # Configuración de resistencia 2 hilos
+                    DMM.write("CONF:RES")
+
+                    # Auto rango
+                    DMM.write("RES:RANG 1000")
+
+                    # VELOCIDAD DE MUESTREO
+                    DMM.write("RES:NPLC 10")
+
+                    # Autozero
+                    DMM.write("RES:ZERO:AUTO ON")
+
+                    # Limpia de errore
+                    DMM.write("*CLS")
+
+                    # Iniciar adquisición
+                    # DMM.write("TRIG:SOUR IMM")
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
                     )
-                    self.root.destroy()
-                    return
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_1_min <= resultado <= test_1_max:
                     label_test1.config(
@@ -2699,15 +2723,42 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_2_min <= resultado <= test_2_max:
                     label_test2.config(
@@ -2736,15 +2787,38 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+                    return
 
                 if test_3_min <= resultado <= test_3_max:
                     label_test3.config(
@@ -2777,15 +2851,43 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    DMM.write("RES:RANG 100")
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_4_min <= resultado <= test_4_max:
                     label_test4.config(
@@ -2814,15 +2916,43 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    DMM.write("RES:RANG 100")
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_5_min <= resultado <= test_5_max:
                     label_test5.config(
@@ -2851,15 +2981,45 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    DMM.write("RES:RANG 1000")
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+                    return
 
                 if test_6_min <= resultado <= test_6_max:
                     label_test6.config(
@@ -2888,15 +3048,44 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    DMM.write("RES:RANG 100")
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_7_min <= resultado <= test_7_max:
                     label_test7.config(
@@ -2925,15 +3114,42 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    DMM.write("RES:RANG 1000")
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_8_min <= resultado <= test_8_max:
                     label_test8.config(
@@ -2962,15 +3178,43 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    DMM.write("RES:RANG 10000")
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_9_min <= resultado <= test_9_max:
                     label_test9.config(
@@ -2999,15 +3243,43 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    DMM.write("RES:RANG 1000")
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_10_min <= resultado <= test_10_max:
                     label_test10.config(
@@ -3036,15 +3308,42 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_11_min <= resultado <= test_11_max:
                     label_test11.config(
@@ -3073,15 +3372,42 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_12_min <= resultado <= test_12_max:
                     label_test12.config(
@@ -3110,15 +3436,43 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtsoc("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    DMM.write("RES:RANG 10000")
+
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_13_min <= resultado <= test_13_max:
                     label_test13.config(
@@ -3134,6 +3488,8 @@ class TestingGTSOC:
                     test_fail()
 
             esperar_entrada_daq(root, inicio_test_13, CANAL_START)
+
+        # Apartir de la 14 son pruebas de voltaje
 
         def test_14_gtsoc(event=None):
             Instrucciones.config(
