@@ -149,6 +149,11 @@ def abrir_equipos():
             9600,
             timeout=1
         )
+        time.sleep(1)
+        PSU.reset_input_buffer()
+        PSU.reset_output_buffer()
+
+        PSU.write(b"OUT0\n")
 
     except serial.SerialException:
         messagebox.showerror(
@@ -1499,6 +1504,7 @@ class TestingGTAO:
                     .replace("V", "")
                     .strip()
                 )
+                print((respuesta_v))
                 voltaje_medido = float(
                     respuesta_v
                 )
@@ -1514,8 +1520,10 @@ class TestingGTAO:
                     .decode(errors="ignore")
                     .replace("\x00", "")
                     .replace("A", "")
+                    .replace("kw", "")
                     .strip()
                 )
+                print((respuesta_i))
                 corriente_medida = float(
                     respuesta_i
                 )
