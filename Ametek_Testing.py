@@ -15,6 +15,7 @@ import winerror
 import serial
 from PIL import Image, ImageTk
 import nidaqmx
+import pyvisa
 
 mutex = win32event.CreateMutex(None, False, "Ametek_Testing")
 last_error = win32api.GetLastError()
@@ -112,29 +113,42 @@ def testspec_gtsoc(seccion, clave):
 
 DMM = None
 PSU = None
+RM = None
 CANAL_START = "Dev1/port0/line0"
 
 
 def abrir_equipos():
-    """Abrir puertos de equipos"""
+    """Abrir equipos"""
 
-    global DMM, PSU
+    global DMM, PSU, RM
 
-    com_dmm = obtener_configuracion('DMM', 'COM')
-    com_psu = obtener_configuracion('PSU', 'COM')
+    recurso_dmm = obtener_configuracion("DMM", "RESOURCE")
+    com_psu = obtener_configuracion("PSU", "COM")
 
     try:
-        DMM = serial.Serial(com_dmm, 9600, timeout=1)
+        RM = pyvisa.ResourceManager()
 
-    except serial.SerialException:
+        DMM = RM.open_resource(recurso_dmm)
+
+        DMM.timeout = 5000
+        DMM.write_termination = "\n"
+        DMM.read_termination = "\n"
+
+        print("DMM:", DMM.query("*IDN?").strip())
+
+    except Exception as e:
         messagebox.showerror(
             "DMM Not Found",
-            f"Unable to connect to the multimeter ({com_dmm})."
+            f"No se pudo conectar al Keysight 34461A.\n\n{e}"
         )
         return
 
     try:
-        PSU = serial.Serial(com_psu, 9600, timeout=1)
+        PSU = serial.Serial(
+            com_psu,
+            9600,
+            timeout=1
+        )
 
     except serial.SerialException:
         messagebox.showerror(
@@ -145,11 +159,29 @@ def abrir_equipos():
 
 
 def cerrar_puertos():
-    """Cerrar puertos de equipos"""
-    global DMM, PSU
-    if DMM is not None and DMM.is_open:
-        DMM.close()
+
+    global DMM, PSU, RM
+
+    if DMM is not None:
+
+        try:
+            DMM.close()
+        except:
+            pass
+
+        DMM = None
+
+    if RM is not None:
+
+        try:
+            RM.close()
+        except:
+            pass
+
+        RM = None
+
     if PSU is not None and PSU.is_open:
+
         PSU.write(b"OUT0\n")
         PSU.close()
 
@@ -655,34 +687,81 @@ class TestingGTAO:
 
             def configurar_multimetro():
                 try:
-                    DMM.write(b"CONF:RES\n")
-                    delay = int(testspec_gtao("Delay_Ohm", "delay"))
-                    root.after(delay, leer_resultado)
-                except Exception:
-                    messagebox.showerror(
-                        "No encontrado",
-                        f"No se puede conectar al Multímetro y/o Fuente de Alimentación."
+
+                    # Configuración de resistencia 2 hilos
+                    DMM.write("CONF:RES")
+
+                    # Auto rango
+                    DMM.write("RES:RANG:AUTO ON")
+
+                    # Autozero
+                    DMM.write("RES:ZERO:AUTO ON")
+
+                    # Iniciar adquisición
+                    DMM.write("INIT")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Ohm",
+                            "delay"
+                        )
                     )
-                    self.root.destroy()
-                    return
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+
+                    resultado = float(
+                        DMM.query("FETC?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_1_min <= resultado <= test_1_max:
+
                     label_test1.config(
-                        text=f"Test 1: {test_1_name} - Min: {test_1_min} {test_1_unit}, Max: {test_1_max} {test_1_unit} - Result: PASS ({resultado:.4f} {test_1_unit})",
-                        bg="#C6EFCE", fg="green"
+                        text=f"Test 1: {test_1_name} - "
+                        f"Min: {test_1_min} {test_1_unit}, "
+                        f"Max: {test_1_max} {test_1_unit} - "
+                        f"Result: PASS "
+                        f"({resultado:.4f} {test_1_unit})",
+                        bg="#C6EFCE",
+                        fg="green"
                     )
+
                     test_2_gtao()
+
                 else:
+
                     label_test1.config(
-                        text=f"Test 1: {test_1_name} - Min: {test_1_min} {test_1_unit}, Max: {test_1_max} {test_1_unit} - Result: FAIL ({resultado:.4f} {test_1_unit})",
-                        bg="#FFC7CE", fg="red"
+                        text=f"Test 1: {test_1_name} - "
+                        f"Min: {test_1_min} {test_1_unit}, "
+                        f"Max: {test_1_max} {test_1_unit} - "
+                        f"Result: FAIL "
+                        f"({resultado:.4f} {test_1_unit})",
+                        bg="#FFC7CE",
+                        fg="red"
                     )
+
                     test_fail()
 
             esperar_entrada_daq(
@@ -741,31 +820,61 @@ class TestingGTAO:
                     text=f"Prueba: {test_3_name} {test_3_unit} - En proceso...",
                     bg="#FFEB9C", fg="#9C5700"
                 )
-                root.after(100, configurar_multimetro)
+                root.after(100, leer_resultado)
 
-            def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
+            def leer_resultado(medicion=1):
+
                 delay = int(testspec_gtao("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                intervalo = delay // 10
 
-            def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                def medir():
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    DMM.write(b"MEAS:RES?\n")
 
-                if test_3_min <= resultado <= test_3_max:
-                    label_test3.config(
-                        text=f"Test 3: {test_3_name} - Min: {test_3_min} {test_3_unit}, Max: {test_3_max} {test_3_unit} - Result: PASS ({resultado:.4f} {test_3_unit})",
-                        bg="#C6EFCE", fg="green"
+                    respuesta = DMM.readline().decode().strip()
+
+                    try:
+                        resultado = float(respuesta)
+                    except (ValueError, TypeError):
+                        resultado = 0.0
+
+                    print(
+                        f"Medición {medicion}/10: "
+                        f"{resultado:.4f} {test_3_unit}"
                     )
-                    test_4_gtao()
-                else:
-                    label_test3.config(
-                        text=f"Test 3: {test_3_name} - Min: {test_3_min} {test_3_unit}, Max: {test_3_max} {test_3_unit} - Result: FAIL ({resultado:.4f} {test_3_unit})",
-                        bg="#FFC7CE", fg="red"
-                    )
-                    test_fail()
+
+                    if medicion < 10:
+                        leer_resultado(medicion + 1)
+                        return
+
+                    # Únicamente la medición 10 se evalúa
+                    if test_3_min <= resultado <= test_3_max:
+
+                        label_test3.config(
+                            text=f"Test 3: {test_3_name} - "
+                            f"Min: {test_3_min} {test_3_unit}, "
+                            f"Max: {test_3_max} {test_3_unit} - "
+                            f"Result: PASS ({resultado:.4f} {test_3_unit})",
+                            bg="#C6EFCE",
+                            fg="green"
+                        )
+
+                        test_4_gtao()
+
+                    else:
+
+                        label_test3.config(
+                            text=f"Test 3: {test_3_name} - "
+                            f"Min: {test_3_min} {test_3_unit}, "
+                            f"Max: {test_3_max} {test_3_unit} - "
+                            f"Result: FAIL ({resultado:.4f} {test_3_unit})",
+                            bg="#FFC7CE",
+                            fg="red"
+                        )
+
+                        test_fail()
+
+                root.after(intervalo, medir)
 
             esperar_entrada_daq(
                 root,
