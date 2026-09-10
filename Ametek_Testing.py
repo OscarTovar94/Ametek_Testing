@@ -540,44 +540,49 @@ class TestingGTAO:
         label_test9.grid(row=13, column=0, columnspan=2,
                          pady=0, padx=0, sticky="w")
 
+        label_short_test = tk.Label(frame, text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A", font=(
+            "Arial", 12), fg="black")
+        label_short_test.grid(row=14, column=0, columnspan=2,
+                              pady=0, padx=0, sticky="w")
+
         label_test10 = tk.Label(frame, text=f"Test 10: {test_10_name} - Min: {test_10_min} {test_10_unit}, Max: {test_10_max} {test_10_unit}", font=(
             "Arial", 12), fg="black")
-        label_test10.grid(row=14, column=0, columnspan=2,
+        label_test10.grid(row=15, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test11 = tk.Label(frame, text=f"Test 11: {test_11_name} - Min: {test_11_min} {test_11_unit}, Max: {test_11_max} {test_11_unit}", font=(
             "Arial", 12), fg="black")
-        label_test11.grid(row=15, column=0, columnspan=2,
+        label_test11.grid(row=16, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test12 = tk.Label(frame, text=f"Test 12: {test_12_name} - Min: {test_12_min} {test_12_unit}, Max: {test_12_max} {test_12_unit}", font=(
             "Arial", 12), fg="black")
-        label_test12.grid(row=16, column=0, columnspan=2,
+        label_test12.grid(row=17, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test13 = tk.Label(frame, text=f"Test 13: {test_13_name} - Min: {test_13_min} {test_13_unit}, Max: {test_13_max} {test_13_unit}", font=(
             "Arial", 12), fg="black")
-        label_test13.grid(row=17, column=0, columnspan=2,
+        label_test13.grid(row=18, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test14 = tk.Label(frame, text=f"Test 14: {test_14_name} - Min: {test_14_min} {test_14_unit}, Max: {test_14_max} {test_14_unit}", font=(
             "Arial", 12), fg="black")
-        label_test14.grid(row=18, column=0, columnspan=2,
+        label_test14.grid(row=19, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test15 = tk.Label(frame, text=f"Test 15: {test_15_name} - Min: {test_15_min} {test_15_unit}, Max: {test_15_max} {test_15_unit}", font=(
             "Arial", 12), fg="black")
-        label_test15.grid(row=19, column=0, columnspan=2,
+        label_test15.grid(row=20, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test16 = tk.Label(frame, text=f"Test 16: {test_16_name} - Min: {test_16_min} {test_16_unit}, Max: {test_16_max} {test_16_unit}", font=(
             "Arial", 12), fg="black")
-        label_test16.grid(row=20, column=0, columnspan=2,
+        label_test16.grid(row=21, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_resultado = tk.Label(frame, text="", font=(
             "Arial", 20), fg="black")
-        label_resultado.grid(row=21, column=0, columnspan=2,
+        label_resultado.grid(row=22, column=0, columnspan=2,
                              pady=10, padx=0, sticky="nsew")
 
         imagen = Image.open("GTAO.png")
@@ -586,7 +591,7 @@ class TestingGTAO:
 
         label_image_gtao = tk.Label(frame, image=foto)
         label_image_gtao.image = foto
-        label_image_gtao.grid(row=4, column=2, columnspan=2, rowspan=19,
+        label_image_gtao.grid(row=4, column=2, columnspan=2, rowspan=18,
                               pady=0, padx=0, sticky="e")
 
         def reiniciar_prueba():
@@ -617,6 +622,9 @@ class TestingGTAO:
                 text=f"Test 8: {test_8_name} - Min: {test_8_min} {test_8_unit}, Max: {test_8_max} {test_8_unit}", bg="SystemButtonFace", fg="black")
             label_test9.config(
                 text=f"Test 9: {test_9_name} - Min: {test_9_min} {test_9_unit}, Max: {test_9_max} {test_9_unit}", bg="SystemButtonFace", fg="black")
+            label_short_test.config(
+                text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A", bg="SystemButtonFace", fg="black")
+
             label_test10.config(
                 text=f"Test 10: {test_10_name} - Min: {test_10_min} {test_10_unit}, Max: {test_10_max} {test_10_unit}", bg="SystemButtonFace", fg="black")
             label_test11.config(
@@ -637,7 +645,7 @@ class TestingGTAO:
             root,
             text="Reiniciar Prueba", font=("Arial", 14, "bold"), bg="#BFBFBF", fg="black",
             command=reiniciar_prueba
-        ).grid(row=20, column=0, columnspan=3,
+        ).grid(row=23, column=0, columnspan=3,
                pady=(0, 10), padx=50, sticky="nsew")
 
         def validar_id(event=None):
@@ -667,9 +675,9 @@ class TestingGTAO:
             """Instrucciones para la conexión de la PCBA"""
             root.focus_set()
             Instrucciones.config(
-                text="Precaución\nConecta los cables/arneses en la PCBA según la WI y presiona el pedal para iniciar.", bg="#FFC7CE")
+                text="Precaución\nConecta el CON1 en la PCBA según la WI y presiona la barra espaciadora para comenzar la prueba de cortos.", bg="#FFC7CE")
 
-            root.bind("<space>", test_10_gtao)
+            root.bind("<space>", prueba_corto_gtao)
 
         def test_1_gtao(event=None):
             abrir_equipos()
@@ -692,13 +700,19 @@ class TestingGTAO:
                     DMM.write("CONF:RES")
 
                     # Auto rango
-                    DMM.write("RES:RANG:AUTO ON")
+                    DMM.write("RES:RANG 1000")
+
+                    # VELOCIDAD DE MUESTREO
+                    DMM.write("RES:NPLC 10")
 
                     # Autozero
                     DMM.write("RES:ZERO:AUTO ON")
 
+                    # Limpia de errore
+                    DMM.write("*CLS")
+
                     # Iniciar adquisición
-                    DMM.write("INIT")
+                    # DMM.write("TRIG:SOUR IMM")
 
                     delay = int(
                         testspec_gtao(
@@ -724,7 +738,7 @@ class TestingGTAO:
                 try:
 
                     resultado = float(
-                        DMM.query("FETC?")
+                        DMM.query("READ?")
                     )
 
                 except Exception as e:
@@ -782,15 +796,54 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtao("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    # Configuración de resistencia 2 hilos
+                    # DMM.write("CONF:RES")
+
+                    # Auto rango
+                    # DMM.write("RES:RANG:AUTO ON")
+
+                    # Autozero
+                    # DMM.write("RES:ZERO:AUTO ON")
+
+                    # Iniciar adquisición
+                    # DMM.write("TRIG:SOUR IMM")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_2_min <= resultado <= test_2_max:
                     label_test2.config(
@@ -820,61 +873,81 @@ class TestingGTAO:
                     text=f"Prueba: {test_3_name} {test_3_unit} - En proceso...",
                     bg="#FFEB9C", fg="#9C5700"
                 )
-                root.after(100, leer_resultado)
+                root.after(100, configurar_multimetro)
 
-            def leer_resultado(medicion=1):
+            def configurar_multimetro():
+                try:
 
-                delay = int(testspec_gtao("Delay_Ohm", "delay"))
-                intervalo = delay // 10
+                    # Configuración de resistencia 2 hilos
+                    # DMM.write("CONF:RES")
 
-                def medir():
+                    # Auto rango
+                    # DMM.write("RES:RANG:AUTO ON")
 
-                    DMM.write(b"MEAS:RES?\n")
+                    # Autozero
+                    # DMM.write("RES:ZERO:AUTO ON")
 
-                    respuesta = DMM.readline().decode().strip()
+                    # Iniciar adquisición
+                    # DMM.write("INIT")
 
-                    try:
-                        resultado = float(respuesta)
-                    except (ValueError, TypeError):
-                        resultado = 0.0
-
-                    print(
-                        f"Medición {medicion}/10: "
-                        f"{resultado:.4f} {test_3_unit}"
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Ohm",
+                            "delay"
+                        )
                     )
 
-                    if medicion < 10:
-                        leer_resultado(medicion + 1)
-                        return
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
 
-                    # Únicamente la medición 10 se evalúa
-                    if test_3_min <= resultado <= test_3_max:
+                except Exception as e:
 
-                        label_test3.config(
-                            text=f"Test 3: {test_3_name} - "
-                            f"Min: {test_3_min} {test_3_unit}, "
-                            f"Max: {test_3_max} {test_3_unit} - "
-                            f"Result: PASS ({resultado:.4f} {test_3_unit})",
-                            bg="#C6EFCE",
-                            fg="green"
-                        )
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
-                        test_4_gtao()
+            def leer_resultado():
+                try:
 
-                    else:
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
 
-                        label_test3.config(
-                            text=f"Test 3: {test_3_name} - "
-                            f"Min: {test_3_min} {test_3_unit}, "
-                            f"Max: {test_3_max} {test_3_unit} - "
-                            f"Result: FAIL ({resultado:.4f} {test_3_unit})",
-                            bg="#FFC7CE",
-                            fg="red"
-                        )
+                except Exception as e:
 
-                        test_fail()
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
 
-                root.after(intervalo, medir)
+                    return
+
+                if test_3_min <= resultado <= test_3_max:
+                    label_test3.config(
+                        text=f"Test 3: {test_3_name} - "
+                        f"Min: {test_3_min} {test_3_unit}, "
+                        f"Max: {test_3_max} {test_3_unit} - "
+                        f"Result: PASS ({resultado:.4f} {test_3_unit})",
+                        bg="#C6EFCE",
+                        fg="green"
+                    )
+
+                    test_4_gtao()
+
+                else:
+                    label_test3.config(
+                        text=f"Test 3: {test_3_name} - "
+                        f"Min: {test_3_min} {test_3_unit}, "
+                        f"Max: {test_3_max} {test_3_unit} - "
+                        f"Result: FAIL ({resultado:.4f} {test_3_unit})",
+                        bg="#FFC7CE",
+                        fg="red"
+                    )
+
+                    test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -894,15 +967,54 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtao("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    # Configuración de resistencia 2 hilos
+                    # DMM.write("CONF:RES")
+
+                    # Auto rango
+                    # DMM.write("RES:RANG:AUTO ON")
+
+                    # Autozero
+                    # DMM.write("RES:ZERO:AUTO ON")
+
+                    # Iniciar adquisición
+                    # DMM.write("INIT")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_4_min <= resultado <= test_4_max:
                     label_test4.config(
@@ -935,15 +1047,54 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtao("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    # Configuración de resistencia 2 hilos
+                    # DMM.write("CONF:RES")
+
+                    # Auto rango
+                    DMM.write("RES:RANG 10000")
+
+                    # Autozero
+                    # DMM.write("RES:ZERO:AUTO ON")
+
+                    # Iniciar adquisición
+                    # DMM.write("INIT")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_5_min <= resultado <= test_5_max:
                     label_test5.config(
@@ -976,15 +1127,54 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtao("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    # Configuración de resistencia 2 hilos
+                    # DMM.write("CONF:RES")
+
+                    # Auto rango
+                    DMM.write("RES:RANG 1000")
+
+                    # Autozero
+                    # DMM.write("RES:ZERO:AUTO ON")
+
+                    # Iniciar adquisición
+                    # DMM.write("INIT")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_6_min <= resultado <= test_6_max:
                     label_test6.config(
@@ -997,6 +1187,7 @@ class TestingGTAO:
                         text=f"Test 6: {test_6_name} - Min: {test_6_min} {test_6_unit}, Max: {test_6_max} {test_6_unit} - Result: FAIL ({resultado:.4f} {test_6_unit})",
                         bg="#FFC7CE", fg="red"
                     )
+                   # test_7_gtao() # skip prueba
                     test_fail()
 
             esperar_entrada_daq(
@@ -1017,15 +1208,54 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtao("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    # Configuración de resistencia 2 hilos
+                    # DMM.write("CONF:RES")
+
+                    # Auto rango
+                    # DMM.write("RES:RANG 1000")
+
+                    # Autozero
+                    # DMM.write("RES:ZERO:AUTO ON")
+
+                    # Iniciar adquisición
+                    # DMM.write("INIT")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ?")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_7_min <= resultado <= test_7_max:
                     label_test7.config(
@@ -1038,6 +1268,7 @@ class TestingGTAO:
                         text=f"Test 7: {test_7_name} - Min: {test_7_min} {test_7_unit}, Max: {test_7_max} {test_7_unit} - Result: FAIL ({resultado:.4f} {test_7_unit})",
                         bg="#FFC7CE", fg="red"
                     )
+                   # test_8_gtao() #Skip prueba
                     test_fail()
 
             esperar_entrada_daq(
@@ -1058,15 +1289,54 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtao("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    # Configuración de resistencia 2 hilos
+                    # DMM.write("CONF:RES")
+
+                    # Auto rango
+                    DMM.write("RES:RANG 10000")
+
+                    # Autozero
+                    # DMM.write("RES:ZERO:AUTO ON")
+
+                    # Iniciar adquisición
+                    # DMM.write("INIT")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_8_min <= resultado <= test_8_max:
                     label_test8.config(
@@ -1099,15 +1369,54 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro)
 
             def configurar_multimetro():
-                # DMM.write(b"CONF:RES\n")
-                delay = int(testspec_gtao("Delay_Ohm", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+
+                    # Configuración de resistencia 2 hilos
+                    # DMM.write("CONF:RES")
+
+                    # Auto rango
+                    DMM.write("RES:RANG 100000")
+
+                    # Autozero
+                    # DMM.write("RES:ZERO:AUTO ON")
+
+                    # Iniciar adquisición
+                    # DMM.write("INIT")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Ohm",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al configurar el Keysight 34461A:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"MEAS:RES?\n")
+                try:
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    resultado = float(
+                        DMM.query("READ")
+                    )
+
+                except Exception as e:
+
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer el multímetro:\n{e}"
+                    )
+
+                    return
 
                 if test_9_min <= resultado <= test_9_max:
                     label_test9.config(
@@ -1128,6 +1437,124 @@ class TestingGTAO:
                 CANAL_START
             )
 
+        def prueba_corto_gtao():
+
+            try:
+                voltaje = float(
+                    testspec_gtao("Short_Test", "Voltage")
+                )
+
+                corriente_limite = float(
+                    testspec_gtao("Short_Test", "Current")
+                )
+
+                # Configurar canal 2
+                PSU.write(f"VSET2:{voltaje}\n".encode())
+                time.sleep(0.1)
+
+                PSU.write(f"ISET2:{corriente_limite}\n".encode())
+                time.sleep(0.1)
+
+                # Encender salida
+                PSU.write(b"OUT1\n")
+
+                # Esperar estabilización
+                root.after(
+                    500,
+                    verificar_corto_gtao
+                )
+
+            except Exception as e:
+
+                try:
+                    PSU.write(b"OUT0\n")
+                except:
+                    pass
+
+                messagebox.showerror(
+                    "Error PSU",
+                    f"Error al iniciar prueba de corto:\n{e}"
+                )
+
+        def verificar_corto_gtao():
+
+            try:
+
+                # -----------------------------
+                # Leer voltaje real
+                # -----------------------------
+                PSU.write(b"VOUT2?\n")
+                voltaje_medido = float(
+                    PSU.readline().decode().strip()
+                )
+
+                time.sleep(0.1)
+
+                # -----------------------------
+                # Leer corriente real
+                # -----------------------------
+                PSU.write(b"IOUT2?\n")
+                corriente_medida = float(
+                    PSU.readline().decode().strip()
+                )
+
+                voltaje_programado = float(
+                    testspec_gtao("Short_Test", "Voltage")
+                )
+
+                corriente_limite = float(
+                    testspec_gtao("Short_Test", "Current")
+                )
+
+                print(
+                    f"Vout = {voltaje_medido:.3f} V | "
+                    f"Iout = {corriente_medida:.3f} A"
+                )
+
+                # ------------------------------------
+                # Criterios de posible corto
+                # ------------------------------------
+
+                corriente_alta = (
+                    corriente_medida >= corriente_limite * 0.95
+                )
+
+                voltaje_bajo = (
+                    voltaje_medido <= voltaje_programado * 0.80
+                )
+
+                if corriente_alta and voltaje_bajo:
+
+                    PSU.write(b"OUT0\n")
+
+                    label_short_test.config(
+                        text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A - Result: FAIL", bg="#FFC7CE", fg="red")
+
+                    test_fail()
+
+                else:
+
+                    print("Prueba de corto: PASS")
+
+                    # Puedes dejar la fuente encendida
+                    # si inmediatamente comienzas voltajes
+                    label_short_test.config(
+                        text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A - Result: PASS", bg="#C6EFCE", fg="green")
+
+                    test_10_gtao()
+
+            except Exception as e:
+
+                try:
+                    PSU.write(b"OUT0\n")
+                except:
+                    pass
+
+                messagebox.showerror(
+                    "Error PSU",
+                    f"Error al verificar corto:\n{e}"
+                )
+
         def test_10_gtao(event=None):
             Instrucciones.config(
                 text=f"Coloque la punta roja del multímetro en el pin de {test_10_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
@@ -1143,26 +1570,51 @@ class TestingGTAO:
             current_gtao = float(testspec_gtao("Current", "Current"))
 
             def configurar_multimetro_psu():
-                DMM.write(b"CONF:VOLT:DC\n")
-                time.sleep(0.1)
-                PSU.write(b"VSET2:0\n")
-                time.sleep(0.1)
-                PSU.write(b"ISET2:0\n")
-                time.sleep(0.1)
-                PSU.write(f"VSET1:{volatage_gtao}\n".encode())
-                time.sleep(0.1)
-                PSU.write(f"ISET1:{current_gtao}\n".encode())
-                time.sleep(0.1)
-                PSU.write(b"OUT1\n")
+                try:
+                    DMM.write("CONF:VOLT:DC")
+                    DMM.write("VOLT:DC:RANG 10")
+                    DMM.write("VOLT:DC:NPLC 10")
+                    DMM.write("VOLT:DC:ZERO:AUTO ON")
+                    PSU.write(b"VSET1:0\n")
+                    time.sleep(0.1)
+                    PSU.write(b"ISET1:0\n")
+                    time.sleep(0.1)
+                    PSU.write(f"VSET2:{volatage_gtao}\n".encode())
+                    time.sleep(0.1)
+                    PSU.write(f"ISET2:{current_gtao}\n".encode())
+                    time.sleep(0.1)
+                    PSU.write(b"OUT1\n")
 
-                delay = int(testspec_gtao("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
+                try:
+                    resultado = float(DMM.query("READ?"))
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    print(f"Voltaje: {resultado:.4f} V")
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_10_min <= resultado <= test_10_max:
                     label_test10.config(
@@ -1192,15 +1644,39 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtao("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
+                try:
+                    resultado = float(DMM.query("READ?"))
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    print(f"Voltaje: {resultado:.4f} V")
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_11_min <= resultado <= test_11_max:
                     label_test11.config(
@@ -1230,15 +1706,39 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtao("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
+                try:
+                    resultado = float(DMM.query("READ?"))
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    print(f"Voltaje: {resultado:.4f} V")
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_12_min <= resultado <= test_12_max:
                     label_test12.config(
@@ -1268,15 +1768,39 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtao("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
+                try:
+                    resultado = float(DMM.query("READ?"))
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    print(f"Voltaje: {resultado:.4f} V")
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_13_min <= resultado <= test_13_max:
                     label_test13.config(
@@ -1306,15 +1830,39 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtao("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
+                try:
+                    resultado = float(DMM.query("READ?"))
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    print(f"Voltaje: {resultado:.4f} V")
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_14_min <= resultado <= test_14_max:
                     label_test14.config(
@@ -1344,15 +1892,39 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtao("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
+                try:
+                    resultado = float(DMM.query("READ?"))
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    print(f"Voltaje: {resultado:.4f} V")
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_15_min <= resultado <= test_15_max:
                     label_test15.config(
@@ -1382,15 +1954,39 @@ class TestingGTAO:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtao("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
+                try:
+                    resultado = float(DMM.query("READ?"))
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                    print(f"Voltaje: {resultado:.4f} V")
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_16_min <= resultado <= test_16_max:
                     label_test16.config(
@@ -1472,6 +2068,7 @@ class TestingGTAO:
                 archivo.write(label_test7.cget("text") + "\n")
                 archivo.write(label_test8.cget("text") + "\n")
                 archivo.write(label_test9.cget("text") + "\n")
+                archivo.write(label_short_test.cget("text") + "\n")
                 archivo.write(label_test10.cget("text") + "\n")
                 archivo.write(label_test11.cget("text") + "\n")
                 archivo.write(label_test12.cget("text") + "\n")
