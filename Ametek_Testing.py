@@ -1188,8 +1188,8 @@ class TestingGTAO:
                         text=f"Test 6: {test_6_name} - Min: {test_6_min} {test_6_unit}, Max: {test_6_max} {test_6_unit} - Result: FAIL ({resultado:.4f} {test_6_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_7_gtao() # skip prueba
-                    #test_fail()
+                    test_7_gtao()  # skip prueba
+                    # test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1269,8 +1269,8 @@ class TestingGTAO:
                         text=f"Test 7: {test_7_name} - Min: {test_7_min} {test_7_unit}, Max: {test_7_max} {test_7_unit} - Result: FAIL ({resultado:.4f} {test_7_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_8_gtao() #Skip prueba
-                    #test_fail()
+                    test_8_gtao()  # Skip prueba
+                    # test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1350,7 +1350,7 @@ class TestingGTAO:
                         text=f"Test 8: {test_8_name} - Min: {test_8_min} {test_8_unit}, Max: {test_8_max} {test_8_unit} - Result: FAIL ({resultado:.4f} {test_8_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    #test_fail() #Skip prueba
+                    # test_fail() #Skip prueba
                     test_9_gtao()
 
             esperar_entrada_daq(
@@ -1431,7 +1431,7 @@ class TestingGTAO:
                         text=f"Test 9: {test_9_name} - Min: {test_9_min} {test_9_unit}, Max: {test_9_max} {test_9_unit} - Result: FAIL ({resultado:.4f} {test_9_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    #test_fail() #Skip prueba
+                    # test_fail() #Skip prueba
                     conexion_pcba()
 
             esperar_entrada_daq(
@@ -1445,7 +1445,7 @@ class TestingGTAO:
             Instrucciones.config(
                 text=f"Prueba: {test_9_name} {test_9_unit} - En proceso...",
                 bg="#FFEB9C", fg="#9C5700"
-                )
+            )
 
             try:
                 voltaje = float(
@@ -1498,7 +1498,7 @@ class TestingGTAO:
                     .replace("\x00", "")
                     .replace("V", "")
                     .strip()
-                ) 
+                )
                 voltaje_medido = float(
                     respuesta_v
                 )
@@ -1538,7 +1538,7 @@ class TestingGTAO:
                 messagebox.showerror(
                     "Error PSU",
                     f"Error:\n{e}"
-                    )
+                )
 
             # ------------------------------------
             # Criterios de posible corto
@@ -1557,7 +1557,7 @@ class TestingGTAO:
                 PSU.write(b"OUT0\n")
                 label_short_test.config(
                     text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A - Result: FAIL ({voltaje_medido:.3f}V | {corriente_medida:.3f}A )", bg="#FFC7CE", fg="red")
-                
+
                 test_fail()
 
             else:
@@ -2008,15 +2008,51 @@ class TestingGTAO:
                         bg="#C6EFCE", fg="green"
                     )
                     PSU.write(b"OUT0\n")
-                    test_pass()
+                    evaluar_resultado_final()
                 else:
                     label_test16.config(
                         text=f"Test 16: {test_16_name} - Min: {test_16_min} {test_16_unit}, Max: {test_16_max} {test_16_unit} - Result: FAIL ({resultado:.4f} {test_16_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    evaluar_resultado_final()
 
             esperar_entrada_daq(root, inicio_test_16, CANAL_START)
+
+        def evaluar_resultado_final():
+
+            labels = [
+                label_test1,
+                label_test2,
+                label_test3,
+                label_test4,
+                label_test5,
+                label_test6,
+                label_test7,
+                label_test8,
+                label_test9,
+                label_short_test,
+                label_test10,
+                label_test11,
+                label_test12,
+                label_test13,
+                label_test14,
+                label_test15,
+                label_test16
+            ]
+
+            resultados = [
+                label.cget("text").upper()
+                for label in labels
+            ]
+
+            if any("FAIL" in resultado for resultado in resultados):
+                test_fail()
+
+            elif all("PASS" in resultado for resultado in resultados):
+                test_pass()
+
+            else:
+                print("Existen pruebas pendientes")
 
         def test_fail(event=None):
             """En caso de falla en algún test, esta función permitirá reiniciar la prueba"""
