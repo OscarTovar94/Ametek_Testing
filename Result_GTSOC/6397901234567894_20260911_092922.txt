@@ -1,0 +1,33 @@
+ID: 6397901234567894
+Date: 2026-09-11 09:29:22
+Employee: 0202
+Work order: pd0000357
+Result: TEST FAIL
+
+Test 1: UTIL_3V3 - Min: 270.0 Ohm, Max: 520.0 Ohm - Result: PASS (376.3442 Ohm)
+Test 2: UTIL_1V13 - Min: 300.0 Ohm, Max: 600.0 Ohm - Result: PASS (359.3929 Ohm)
+Test 3: UTIL_2V5 - Min: 525.0 Ohm, Max: 975.0 Ohm - Result: PASS (741.7830 Ohm)
+Test 4: VCCINT - Min: 0.8 Ohm, Max: 2.2 Ohm - Result: PASS (0.8148 Ohm)
+Test 5: VCCPSINT - Min: 4.5 Ohm, Max: 11.0 Ohm - Result: FAIL (0.3536 Ohm)
+Test 6: VCCAUX - Min: 325.0 Ohm, Max: 605.0 Ohm
+Test 7: MGTAVCC - Min: 20.0 Ohm, Max: 45.0 Ohm
+Test 8: MGTAVTT - Min: 320.0 Ohm, Max: 595.0 Ohm
+Test 9: MGTVCCAUX - Min: 575.0 Ohm, Max: 1065.0 Ohm
+Test 10: VCCOPS - Min: 240.0 Ohm, Max: 445.0 Ohm
+Test 11: VCC3V3 - Min: 240.0 Ohm, Max: 445.0 Ohm
+Test 12: DDR4_DIMM_VDDQ - Min: 245.0 Ohm, Max: 460.0 Ohm
+Test 13: DDR4_VTT - Min: 550.0 Ohm, Max: 1020.0 Ohm
+Short Test: Voltage: 12 V, Current: 0.5 A
+Test 14: UTIL_3V3 - Min: 3.3 V, Max: 3.3 V
+Test 15: UTIL_1V13 - Min: 1.13 V, Max: 1.13 V
+Test 16: UTIL_2V5 - Min: 2.5 V, Max: 2.5 V
+Test 17: VCCINT - Min: 0.85 V, Max: 0.85 V
+Test 18: VCCPSINT - Min: 0.85 V, Max: 0.85 V
+Test 19: VCCAUX - Min: 1.8 V, Max: 1.8 V
+Test 20: MGTAVCC - Min: 0.9 V, Max: 0.9 V
+Test 21: MGTAVTT - Min: 1.2 V, Max: 1.2 V
+Test 22: MGTVCCAUX - Min: 1.8 V, Max: 1.8 V
+Test 23: VCCOPS - Min: 1.8 V, Max: 1.8 V
+Test 24: VCC3V3 - Min: 3.3 V, Max: 3.3 V
+Test 25: DDR4_DIMM_VDDQ - Min: 1.2 V, Max: 1.2 V
+Test 26: DDR4_VTT - Min: 0.6 V, Max: 0.6 V
