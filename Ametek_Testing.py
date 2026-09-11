@@ -2418,74 +2418,79 @@ class TestingGTSOC:
         label_test13.grid(row=17, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
+        label_short_test = tk.Label(frame, text=f"Short Test: Voltage: {testspec_gtsoc('Short_Test', 'Voltage')} V, Current: {testspec_gtsoc('Short_Test', 'Current')} A", font=(
+            "Arial", 12), fg="black")
+        label_short_test.grid(row=18, column=0, columnspan=2,
+                              pady=0, padx=0, sticky="w")
+
         label_test14 = tk.Label(frame, text=f"Test 14: {test_14_name} - Min: {test_14_min} {test_14_unit}, Max: {test_14_max} {test_14_unit}", font=(
             "Arial", 12), fg="black")
-        label_test14.grid(row=18, column=0, columnspan=2,
+        label_test14.grid(row=19, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test15 = tk.Label(frame, text=f"Test 15: {test_15_name} - Min: {test_15_min} {test_15_unit}, Max: {test_15_max} {test_15_unit}", font=(
             "Arial", 12), fg="black")
-        label_test15.grid(row=19, column=0, columnspan=2,
+        label_test15.grid(row=20, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test16 = tk.Label(frame, text=f"Test 16: {test_16_name} - Min: {test_16_min} {test_16_unit}, Max: {test_16_max} {test_16_unit}", font=(
             "Arial", 12), fg="black")
-        label_test16.grid(row=20, column=0, columnspan=2,
+        label_test16.grid(row=21, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test17 = tk.Label(frame, text=f"Test 17: {test_17_name} - Min: {test_17_min} {test_17_unit}, Max: {test_17_max} {test_17_unit}", font=(
             "Arial", 12), fg="black")
-        label_test17.grid(row=21, column=0, columnspan=2,
+        label_test17.grid(row=22, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test18 = tk.Label(frame, text=f"Test 18: {test_18_name} - Min: {test_18_min} {test_18_unit}, Max: {test_18_max} {test_18_unit}", font=(
             "Arial", 12), fg="black")
-        label_test18.grid(row=22, column=0, columnspan=2,
+        label_test18.grid(row=23, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test19 = tk.Label(frame, text=f"Test 19: {test_19_name} - Min: {test_19_min} {test_19_unit}, Max: {test_19_max} {test_19_unit}", font=(
             "Arial", 12), fg="black")
-        label_test19.grid(row=23, column=0, columnspan=2,
+        label_test19.grid(row=24, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test20 = tk.Label(frame, text=f"Test 20: {test_20_name} - Min: {test_20_min} {test_20_unit}, Max: {test_20_max} {test_20_unit}", font=(
             "Arial", 12), fg="black")
-        label_test20.grid(row=24, column=0, columnspan=2,
+        label_test20.grid(row=25, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test21 = tk.Label(frame, text=f"Test 21: {test_21_name} - Min: {test_21_min} {test_21_unit}, Max: {test_21_max} {test_21_unit}", font=(
             "Arial", 12), fg="black")
-        label_test21.grid(row=25, column=0, columnspan=2,
+        label_test21.grid(row=26, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test22 = tk.Label(frame, text=f"Test 22: {test_22_name} - Min: {test_22_min} {test_22_unit}, Max: {test_22_max} {test_22_unit}", font=(
             "Arial", 12), fg="black")
-        label_test22.grid(row=26, column=0, columnspan=2,
+        label_test22.grid(row=27, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test23 = tk.Label(frame, text=f"Test 23: {test_23_name} - Min: {test_23_min} {test_23_unit}, Max: {test_23_max} {test_23_unit}", font=(
             "Arial", 12), fg="black")
-        label_test23.grid(row=27, column=0, columnspan=2,
+        label_test23.grid(row=28, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test24 = tk.Label(frame, text=f"Test 24: {test_24_name} - Min: {test_24_min} {test_24_unit}, Max: {test_24_max} {test_24_unit}", font=(
             "Arial", 12), fg="black")
-        label_test24.grid(row=28, column=0, columnspan=2,
+        label_test24.grid(row=29, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test25 = tk.Label(frame, text=f"Test 25: {test_25_name} - Min: {test_25_min} {test_25_unit}, Max: {test_25_max} {test_25_unit}", font=(
             "Arial", 12), fg="black")
-        label_test25.grid(row=29, column=0, columnspan=2,
+        label_test25.grid(row=30, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_test26 = tk.Label(frame, text=f"Test 26: {test_26_name} - Min: {test_26_min} {test_26_unit}, Max: {test_26_max} {test_26_unit}", font=(
             "Arial", 12), fg="black")
-        label_test26.grid(row=30, column=0, columnspan=2,
+        label_test26.grid(row=31, column=0, columnspan=2,
                           pady=0, padx=0, sticky="w")
 
         label_resultado = tk.Label(frame, text="", font=(
             "Arial", 20), fg="black")
-        label_resultado.grid(row=31, column=0, columnspan=2,
+        label_resultado.grid(row=32, column=0, columnspan=2,
                              pady=10, padx=0, sticky="nsew")
 
         imagen = Image.open("GTSOC.png")
@@ -2494,7 +2499,7 @@ class TestingGTSOC:
 
         label_image_gtsoc = tk.Label(frame, image=foto)
         label_image_gtsoc.image = foto
-        label_image_gtsoc.grid(row=4, column=2, columnspan=2, rowspan=33,
+        label_image_gtsoc.grid(row=4, column=2, columnspan=2, rowspan=34,
                                pady=0, padx=0, sticky="e")
 
         def reiniciar_prueba():
@@ -2533,6 +2538,8 @@ class TestingGTSOC:
                 text=f"Test 12: {test_12_name} - Min: {test_12_min} {test_12_unit}, Max: {test_12_max} {test_12_unit}", bg="SystemButtonFace", fg="black")
             label_test13.config(
                 text=f"Test 13: {test_13_name} - Min: {test_13_min} {test_13_unit}, Max: {test_13_max} {test_13_unit}", bg="SystemButtonFace", fg="black")
+            label_short_test.config(
+                text=f"Short Test: Voltage: {testspec_gtsoc('Short_Test', 'Voltage')} V, Current: {testspec_gtsoc('Short_Test', 'Current')} A", bg="SystemButtonFace", fg="black")
             label_test14.config(
                 text=f"Test 14: {test_14_name} - Min: {test_14_min} {test_14_unit}, Max: {test_14_max} {test_14_unit}", bg="SystemButtonFace", fg="black")
             label_test15.config(
@@ -2586,7 +2593,7 @@ class TestingGTSOC:
 
         tk.Button(
             root,
-            text="Reiniciar Prueba", font=("Arial", 12, "bold"), bg="#BFBFBF", fg="black",
+            text="Reiniciar Prueba", font=("Arial", 10, "bold"), bg="#BFBFBF", fg="black",
             command=reiniciar_prueba
         ).grid(row=33, column=0, columnspan=3,
                pady=(0, 10), padx=50, sticky="nsew")
@@ -2618,9 +2625,9 @@ class TestingGTSOC:
             """Instrucciones para la conexión de la PCBA"""
             root.focus_set()
             Instrucciones.config(
-                text="Precaución\nConecta los cables/arneses en la PCBA según la WI y presiona el pedal para iniciar.", bg="#FFC7CE")
+                text="Precaución\nConecta el CON1 en la PCBA según la WI y presiona la barra espaciadora para comenzar la prueba de cortos.", bg="#FFC7CE")
 
-            root.bind("<space>", test_14_gtsoc)
+            root.bind("<space>", prueba_corto_gtsoc)
 
         def test_1_gtsoc(event=None):
             abrir_equipos()
@@ -3491,6 +3498,140 @@ class TestingGTSOC:
 
         # Apartir de la 14 son pruebas de voltaje
 
+        def prueba_corto_gtsoc(event=None):
+            """Prueba de corto circuito en el DUT. Se configura la PSU para entregar un voltaje y corriente especificados en el archivo de especificaciones. Se mide el voltaje y corriente real y se determina si hay un corto circuito basado en los criterios definidos."""
+
+            Instrucciones.config(
+                text=f"Short Test: Voltage: {testspec_gtsoc('Short_Test', 'Voltage')} V, Current: {testspec_gtsoc('Short_Test', 'Current')} A - En proceso...",
+                bg="#FFEB9C", fg="#9C5700"
+            )
+
+            try:
+                voltaje = float(
+                    testspec_gtsoc("Short_Test", "Voltage")
+                )
+
+                corriente_limite = float(
+                    testspec_gtsoc("Short_Test", "Current")
+                )
+
+                # Configurar canal 2
+                PSU.write(f"VSET2:{voltaje}\n".encode())
+                time.sleep(0.1)
+
+                PSU.write(f"ISET2:{corriente_limite}\n".encode())
+                time.sleep(0.1)
+
+                # Encender salida
+                PSU.write(b"OUT1\n")
+
+                # Esperar estabilización
+                root.after(
+                    500,
+                    verificar_corto_gtsoc
+                )
+
+            except Exception as e:
+
+                try:
+                    PSU.write(b"OUT0\n")
+                except:
+                    pass
+
+                messagebox.showerror(
+                    "Error PSU",
+                    f"Error al iniciar prueba de corto:\n{e}"
+                )
+
+        def verificar_corto_gtsoc(event=None):
+            """Verifica si hay un corto circuito en el DUT midiendo el voltaje y corriente reales y comparándolos con los criterios definidos."""
+
+            try:
+
+                # -----------------------------
+                # Leer voltaje real
+                # -----------------------------
+                PSU.write(b"VOUT2?\n")
+                respuesta_v = (
+                    PSU.readline()
+                    .decode(errors="ignore")
+                    .replace("\x00", "")
+                    .replace("V", "")
+                    .strip()
+                )
+                print((respuesta_v))
+                voltaje_medido = float(
+                    respuesta_v
+                )
+
+                time.sleep(0.1)
+
+                # -----------------------------
+                # Leer corriente real
+                # -----------------------------
+                PSU.write(b"IOUT2?\n")
+                respuesta_i = (
+                    PSU.readline()
+                    .decode(errors="ignore")
+                    .replace("\x00", "")
+                    .replace("A", "")
+                    .replace("kw", "")
+                    .strip()
+                )
+                print((respuesta_i))
+                corriente_medida = float(
+                    respuesta_i
+                )
+
+                voltaje_programado = float(
+                    testspec_gtsoc("Short_Test", "Voltage")
+                )
+
+                corriente_limite = float(
+                    testspec_gtsoc("Short_Test", "Current")
+                )
+
+                print(
+                    f"Vout = {voltaje_medido:.3f} V | "
+                    f"Iout = {corriente_medida:.3f} A"
+                )
+
+            except Exception as e:
+                PSU.write(b"OUT0\n")
+                messagebox.showerror(
+                    "Error PSU",
+                    f"Error:\n{e}"
+                )
+
+            # ------------------------------------
+            # Criterios de posible corto
+            # ------------------------------------
+
+            corriente_alta = (
+                corriente_medida >= corriente_limite * 0.90
+            )
+
+            voltaje_bajo = (
+                voltaje_medido <= voltaje_programado * 0.80
+            )
+
+            if corriente_alta and voltaje_bajo:
+
+                PSU.write(b"OUT0\n")
+                label_short_test.config(
+                    text=f"Short Test: Voltage: {testspec_gtsoc('Short_Test', 'Voltage')} V, Current: {testspec_gtsoc('Short_Test', 'Current')} A - Result: FAIL ({voltaje_medido:.3f}V | {corriente_medida:.3f}A )", bg="#FFC7CE", fg="red")
+
+                test_fail()
+
+            else:
+                print("Prueba de corto: PASS")
+                PSU.write(b"OUT0\n")
+
+                label_short_test.config(
+                    text=f"Short Test: Voltage: {testspec_gtsoc('Short_Test', 'Voltage')} V, Current: {testspec_gtsoc('Short_Test', 'Current')} A - Result: PASS ({voltaje_medido:.3f}V | {corriente_medida:.3f}A )", bg="#C6EFCE", fg="green")
+
+                test_14_gtsoc()
+
         def test_14_gtsoc(event=None):
             Instrucciones.config(
                 text=f"Coloque la punta roja del multímetro en el pin de {test_14_name} y la punta negra a tierra según la WI y presiona el pedal para iniciar", bg="SystemButtonFace", fg="blue")
@@ -3506,26 +3647,49 @@ class TestingGTSOC:
             current_gtsoc = float(testspec_gtsoc("Current", "Current"))
 
             def configurar_multimetro_psu():
-                DMM.write(b"CONF:VOLT:DC\n")
-                time.sleep(0.1)
-                PSU.write(b"VSET2:0\n")
-                time.sleep(0.1)
-                PSU.write(b"ISET2:0\n")
-                time.sleep(0.1)
-                PSU.write(f"VSET1:{volatage_gtsoc}\n".encode())
-                time.sleep(0.1)
-                PSU.write(f"ISET1:{current_gtsoc}\n".encode())
-                time.sleep(0.1)
-                PSU.write(b"OUT1\n")
+                try:
+                    DMM.write("CONF:VOLT:DC")
+                    DMM.write("VOLT:DC:RANG 10")
+                    DMM.write("VOLT:DC:NPLC 10")
+                    DMM.write("VOLT:DC:ZERO:AUTO ON")
+                    PSU.write(b"VSET1:0\n")
+                    time.sleep(0.1)
+                    PSU.write(b"ISET1:0\n")
+                    time.sleep(0.1)
+                    PSU.write(f"VSET2:{volatage_gtsoc}\n".encode())
+                    time.sleep(0.1)
+                    PSU.write(f"ISET2:{current_gtsoc}\n".encode())
+                    time.sleep(0.1)
+                    PSU.write(b"OUT1\n")
 
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                    delay = int(
+                        testspec_gtsoc(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
+                try:
+                    resultado = float(DMM.query("READ?"))
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_14_min <= resultado <= test_14_max:
                     label_test14.config(
@@ -3555,15 +3719,37 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
+                try:
+                    resultado = float(DMM.query("READ?"))
 
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_15_min <= resultado <= test_15_max:
                     label_test15.config(
@@ -3593,15 +3779,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_16_min <= resultado <= test_16_max:
                     label_test16.config(
@@ -3631,15 +3838,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_17_min <= resultado <= test_17_max:
                     label_test17.config(
@@ -3669,15 +3897,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_18_min <= resultado <= test_18_max:
                     label_test18.config(
@@ -3707,15 +3956,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_19_min <= resultado <= test_19_max:
                     label_test19.config(
@@ -3745,15 +4015,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_20_min <= resultado <= test_20_max:
                     label_test20.config(
@@ -3783,15 +4074,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_21_min <= resultado <= test_21_max:
                     label_test21.config(
@@ -3821,15 +4133,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_22_min <= resultado <= test_22_max:
                     label_test22.config(
@@ -3859,15 +4192,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_23_min <= resultado <= test_23_max:
                     label_test23.config(
@@ -3897,15 +4251,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_24_min <= resultado <= test_24_max:
                     label_test24.config(
@@ -3935,15 +4310,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_25_min <= resultado <= test_25_max:
                     label_test25.config(
@@ -3973,15 +4369,36 @@ class TestingGTSOC:
                 root.after(100, configurar_multimetro_psu)
 
             def configurar_multimetro_psu():
-                PSU.write(b"OUT1\n")
-                delay = int(testspec_gtsoc("Delay_Voltage", "delay"))
-                root.after(delay, leer_resultado)
+                try:
+                    PSU.write(b"OUT1\n")
+
+                    delay = int(
+                        testspec_gtao(
+                            "Delay_Volt",
+                            "delay"
+                        )
+                    )
+
+                    root.after(
+                        delay,
+                        leer_resultado
+                    )
+
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM/PSU",
+                        f"Error al configurar:\n{e}"
+                    )
 
             def leer_resultado():
-                DMM.write(b"READ?\n")
-
-                respuesta = DMM.readline().decode().strip()
-                resultado = float(respuesta) if respuesta else 0.0
+                try:
+                    resultado = float(DMM.query("READ?"))
+                except Exception as e:
+                    messagebox.showerror(
+                        "Error DMM",
+                        f"Error al leer voltaje:\n{e}"
+                    )
+                    return
 
                 if test_26_min <= resultado <= test_26_max:
                     label_test26.config(
@@ -3989,15 +4406,60 @@ class TestingGTSOC:
                         bg="#C6EFCE", fg="green"
                     )
                     PSU.write(b"OUT0\n")
-                    test_pass()
+                    evaluar_resultado_final()
                 else:
                     label_test26.config(
                         text=f"Test 26: {test_26_name} - Min: {test_26_min} {test_26_unit}, Max: {test_26_max} {test_26_unit} - Result: FAIL ({resultado:.4f} {test_26_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    evaluar_resultado_final()
 
             esperar_entrada_daq(root, inicio_test_26, CANAL_START)
+
+        def evaluar_resultado_final():
+            labels = [
+                label_test1,
+                label_test2,
+                label_test3,
+                label_test4,
+                label_test5,
+                label_test6,
+                label_test7,
+                label_test8,
+                label_test9,
+                label_test10,
+                label_test11,
+                label_test12,
+                label_test13,
+                label_short_test,
+                label_test14,
+                label_test15,
+                label_test16,
+                label_test17,
+                label_test18,
+                label_test19,
+                label_test20,
+                label_test21,
+                label_test22,
+                label_test23,
+                label_test24,
+                label_test25,
+                label_test26
+            ]
+
+            resultados = [
+                label.cget("text").upper()
+                for label in labels
+            ]
+
+            if any("FAIL" in resultado for resultado in resultados):
+                test_fail()
+
+            elif all("PASS" in resultado for resultado in resultados):
+                test_pass()
+
+            else:
+                print("Existen pruebas pendientes")
 
         def test_fail(event=None):
             """En caso de falla en algún test, esta función permitirá reiniciar la prueba"""
@@ -4067,6 +4529,7 @@ class TestingGTSOC:
                 archivo.write(label_test11.cget("text") + "\n")
                 archivo.write(label_test12.cget("text") + "\n")
                 archivo.write(label_test13.cget("text") + "\n")
+                archivo.write(label_short_test.cget("text") + "\n")
                 archivo.write(label_test14.cget("text") + "\n")
                 archivo.write(label_test15.cget("text") + "\n")
                 archivo.write(label_test16.cget("text") + "\n")
