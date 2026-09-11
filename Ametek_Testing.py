@@ -500,7 +500,8 @@ class TestingGTAO:
         test_16_min = float(testspec_gtao("FPGA_MgtAVcc_Voltage", "Min"))
         test_16_max = float(testspec_gtao("FPGA_MgtAVcc_Voltage", "Max"))
 
-        continue_test = obtener_configuracion("Test", "Continue")
+        continue_test = obtener_configuracion(
+            "Test", "Continue").strip().lower() == "true"
 
         label_test1 = tk.Label(frame, text=f"Test 1: {test_1_name} - Min: {test_1_min} {test_1_unit}, Max: {test_1_max} {test_1_unit}", font=(
             "Arial", 12), fg="black")
@@ -2396,7 +2397,8 @@ class TestingGTSOC:
         test_26_min = float(testspec_gtsoc("DDR4_VTT_Voltage", "Min"))
         test_26_max = float(testspec_gtsoc("DDR4_VTT_Voltage", "Max"))
 
-        continue_test = obtener_configuracion("Test", "Continue")
+        continue_test = obtener_configuracion(
+            "Test", "Continue").strip().lower() == "true"
 
         label_test1 = tk.Label(frame, text=f"Test 1: {test_1_name} - Min: {test_1_min} {test_1_unit}, Max: {test_1_max} {test_1_unit}", font=(
             "Arial", 12), fg="black")
