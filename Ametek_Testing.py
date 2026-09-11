@@ -364,7 +364,6 @@ class TestingGTAO:
         self.root.grid_rowconfigure(20, weight=1)
         self.root.grid_rowconfigure(21, weight=1)
         self.root.grid_rowconfigure(22, weight=1)
-        self.root.grid_rowconfigure(23, weight=1)
 
         self.root.grid_columnconfigure(0, weight=1)
         self.root.grid_columnconfigure(1, weight=1)
@@ -378,30 +377,30 @@ class TestingGTAO:
             frame,
             text="Ametek Testing GTAO",
             font=("Arial", 30, "bold")
-        ).grid(row=0, column=0, columnspan=3, pady=20)
+        ).grid(row=0, column=0, columnspan=4, pady=20)
 
         tk.Label(
             frame,
             text=f"#Empleado: {operador}",
             font=("Arial", 14)
-        ).grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
+        ).grid(row=1, column=0, padx=0, pady=10, sticky="w")
 
         tk.Label(
             frame,
             text=f"#Orden: {orden}",
             font=("Arial", 14)
-        ).grid(row=1, column=1, padx=20, pady=10, sticky="nsew")
+        ).grid(row=1, column=1, padx=0, pady=10, sticky="w")
 
         tk.Label(
             frame,
             text=f"#Parte: {modelo}",
             font=("Arial", 14)
-        ).grid(row=1, column=2, padx=20, pady=10, sticky="nsew")
+        ).grid(row=1, column=2, padx=0, pady=10, sticky="w")
 
-        entry_id = tk.Entry(frame, font=("Arial", 20), width=30, justify="center", background="springgreen",
+        entry_id = tk.Entry(frame, font=("Arial", 20), justify="center", background="springgreen",
                             border=3)
-        entry_id.grid(row=2, column=0, columnspan=3,
-                      padx=20, pady=(0, 10), sticky="nsew")
+        entry_id.grid(row=2, column=0, columnspan=4,
+                      padx=0, pady=(0, 10), sticky="nsew")
         entry_id.focus_set()
 
         Instrucciones = tk.Label(frame,
@@ -413,12 +412,12 @@ class TestingGTAO:
                                  wraplength=1000,  # salto de línea automático
                                  anchor="center",
                                  justify="center")
-        Instrucciones.grid(row=3, column=0, columnspan=3, pady=10, padx=0)
+        Instrucciones.grid(row=3, column=0, columnspan=4, pady=10, padx=0)
 
         label_id = tk.Label(frame, text="", font=(
             "Arial", 12, "bold"), fg="black")
         label_id.grid(row=4, column=0, columnspan=2,
-                      pady=0, padx=0, sticky="w")
+                      pady=0, padx=0, sticky="nsew")
 
         test_1_name = testspec_gtao("+5V_Ohm", "Name")
         test_1_unit = testspec_gtao("+5V_Ohm", "Unit")
@@ -506,101 +505,104 @@ class TestingGTAO:
         label_test1 = tk.Label(frame, text=f"Test 1: {test_1_name} - Min: {test_1_min} {test_1_unit}, Max: {test_1_max} {test_1_unit}", font=(
             "Arial", 12), fg="black")
         label_test1.grid(row=5, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test2 = tk.Label(frame, text=f"Test 2: {test_2_name} - Min: {test_2_min} {test_2_unit}, Max: {test_2_max} {test_2_unit}", font=(
             "Arial", 12), fg="black")
         label_test2.grid(row=6, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test3 = tk.Label(frame, text=f"Test 3: {test_3_name} - Min: {test_3_min} {test_3_unit}, Max: {test_3_max} {test_3_unit}", font=(
             "Arial", 12), fg="black")
         label_test3.grid(row=7, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test4 = tk.Label(frame, text=f"Test 4: {test_4_name} - Min: {test_4_min} {test_4_unit}, Max: {test_4_max} {test_4_unit}", font=(
             "Arial", 12), fg="black")
         label_test4.grid(row=8, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test5 = tk.Label(frame, text=f"Test 5: {test_5_name} - Min: {test_5_min} {test_5_unit}, Max: {test_5_max} {test_5_unit}", font=(
             "Arial", 12), fg="black")
         label_test5.grid(row=9, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test6 = tk.Label(frame, text=f"Test 6: {test_6_name} - Min: {test_6_min} {test_6_unit}, Max: {test_6_max} {test_6_unit}", font=(
             "Arial", 12), fg="black")
         label_test6.grid(row=10, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test7 = tk.Label(frame, text=f"Test 7: {test_7_name} - Min: {test_7_min} {test_7_unit}, Max: {test_7_max} {test_7_unit}", font=(
             "Arial", 12), fg="black")
-        label_test7.grid(row=11, column=0, columnspan=3,
-                         pady=0, padx=0, sticky="w")
+        label_test7.grid(row=11, column=0, columnspan=2,
+                         pady=0, padx=0, sticky="nsew")
 
         label_test8 = tk.Label(frame, text=f"Test 8: {test_8_name} - Min: {test_8_min} {test_8_unit}, Max: {test_8_max} {test_8_unit}", font=(
             "Arial", 12), fg="black")
         label_test8.grid(row=12, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test9 = tk.Label(frame, text=f"Test 9: {test_9_name} - Min: {test_9_min} {test_9_unit}, Max: {test_9_max} {test_9_unit}", font=(
             "Arial", 12), fg="black")
         label_test9.grid(row=13, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_short_test = tk.Label(frame, text=f"Short Test: Voltage: {testspec_gtao('Short_Test', 'Voltage')} V, Current: {testspec_gtao('Short_Test', 'Current')} A", font=(
             "Arial", 12), fg="black")
         label_short_test.grid(row=14, column=0, columnspan=2,
-                              pady=0, padx=0, sticky="w")
+                              pady=0, padx=0, sticky="nsew")
 
         label_test10 = tk.Label(frame, text=f"Test 10: {test_10_name} - Min: {test_10_min} {test_10_unit}, Max: {test_10_max} {test_10_unit}", font=(
             "Arial", 12), fg="black")
         label_test10.grid(row=15, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test11 = tk.Label(frame, text=f"Test 11: {test_11_name} - Min: {test_11_min} {test_11_unit}, Max: {test_11_max} {test_11_unit}", font=(
             "Arial", 12), fg="black")
         label_test11.grid(row=16, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test12 = tk.Label(frame, text=f"Test 12: {test_12_name} - Min: {test_12_min} {test_12_unit}, Max: {test_12_max} {test_12_unit}", font=(
             "Arial", 12), fg="black")
         label_test12.grid(row=17, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test13 = tk.Label(frame, text=f"Test 13: {test_13_name} - Min: {test_13_min} {test_13_unit}, Max: {test_13_max} {test_13_unit}", font=(
             "Arial", 12), fg="black")
         label_test13.grid(row=18, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test14 = tk.Label(frame, text=f"Test 14: {test_14_name} - Min: {test_14_min} {test_14_unit}, Max: {test_14_max} {test_14_unit}", font=(
             "Arial", 12), fg="black")
         label_test14.grid(row=19, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test15 = tk.Label(frame, text=f"Test 15: {test_15_name} - Min: {test_15_min} {test_15_unit}, Max: {test_15_max} {test_15_unit}", font=(
             "Arial", 12), fg="black")
         label_test15.grid(row=20, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test16 = tk.Label(frame, text=f"Test 16: {test_16_name} - Min: {test_16_min} {test_16_unit}, Max: {test_16_max} {test_16_unit}", font=(
             "Arial", 12), fg="black")
         label_test16.grid(row=21, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
-        label_resultado = tk.Label(frame, text="", font=(
-            "Arial", 20), fg="black")
-        label_resultado.grid(row=22, column=0, columnspan=2,
-                             pady=10, padx=0, sticky="nsew")
 
         imagen = Image.open("GTAO.png")
-        imagen = imagen.resize((600, 500))
+        imagen = imagen.resize((700, 400))
         foto = ImageTk.PhotoImage(imagen)
 
-        label_image_gtao = tk.Label(frame, image=foto)
+        label_image_gtao = tk.Label(frame, image=foto, anchor="center")
         label_image_gtao.image = foto
-        label_image_gtao.grid(row=4, column=2, columnspan=2, rowspan=19,
-                              pady=0, padx=0, sticky="e")
+        label_image_gtao.grid(row=4, column=2, columnspan=2, rowspan=18,
+                                pady=0, padx=0, sticky="e")
+
+        label_resultado = tk.Label(frame, text="", font=(
+            "Arial", 30), fg="black")
+        label_resultado.grid(row=22, column=0, columnspan=4,
+                             pady=10, padx=0, sticky="nsew")
+
+
 
         def reiniciar_prueba():
             """Reinicia la prueba"""
@@ -649,12 +651,6 @@ class TestingGTAO:
                 text=f"Test 16: {test_16_name} - Min: {test_16_min} {test_16_unit}, Max: {test_16_max} {test_16_unit}", bg="SystemButtonFace", fg="black")
             label_resultado.config(text="", bg="SystemButtonFace", fg="black")
 
-        tk.Button(
-            root,
-            text="Reiniciar Prueba", font=("Arial", 14, "bold"), bg="#BFBFBF", fg="black",
-            command=reiniciar_prueba
-        ).grid(row=23, column=0, columnspan=3,
-               pady=(0, 10), padx=50, sticky="nsew")
 
         def validar_id(event=None):
             reiniciar_prueba()
@@ -666,7 +662,7 @@ class TestingGTAO:
                 )
                 return
 
-            if len(id_value) == 16 and id_value[:6] == str(modelo).strip():
+            if len(id_value) == 21 and id_value[:6] == str(modelo).strip():
                 label_id.config(
                     text=f"{id_value}", bg="#C6EFCE", fg="green")
                 entry_id.delete(0, tk.END)
@@ -2211,12 +2207,12 @@ class TestingGTSOC:
         self.root.grid_rowconfigure(30, weight=1)
         self.root.grid_rowconfigure(31, weight=1)
         self.root.grid_rowconfigure(32, weight=1)
-        self.root.grid_rowconfigure(33, weight=1)
+        
 
         self.root.grid_columnconfigure(0, weight=1)
         self.root.grid_columnconfigure(1, weight=1)
         self.root.grid_columnconfigure(2, weight=1)
-        self.root.grid_columnconfigure(2, weight=1)
+        self.root.grid_columnconfigure(3, weight=1)
 
         frame = tk.Frame(self.root)
         frame.grid(row=1, column=1)
@@ -2225,30 +2221,30 @@ class TestingGTSOC:
             frame,
             text="Ametek Testing GTSOC",
             font=("Arial", 30, "bold")
-        ).grid(row=0, column=0, columnspan=3, pady=20)
+        ).grid(row=0, column=0, columnspan=4, pady=20)
 
         tk.Label(
             frame,
             text=f"#Empleado: {operador}",
             font=("Arial", 14)
-        ).grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
+        ).grid(row=1, column=0, padx=0, pady=10, sticky="w")
 
         tk.Label(
             frame,
             text=f"#Orden: {orden}",
             font=("Arial", 14)
-        ).grid(row=1, column=1, padx=20, pady=10, sticky="nsew")
+        ).grid(row=1, column=1, padx=0, pady=10, sticky="w")
 
         tk.Label(
             frame,
             text=f"#Parte: {modelo}",
             font=("Arial", 14)
-        ).grid(row=1, column=2, padx=20, pady=10, sticky="nsew")
+        ).grid(row=1, column=2, padx=0, pady=10, sticky="w")
 
-        entry_id = tk.Entry(frame, font=("Arial", 20), width=30, justify="center", background="springgreen",
+        entry_id = tk.Entry(frame, font=("Arial", 20), justify="center", background="springgreen",
                             border=3)
-        entry_id.grid(row=2, column=0, columnspan=3,
-                      padx=20, pady=(0, 10), sticky="nsew")
+        entry_id.grid(row=2, column=0, columnspan=4,
+                      padx=0, pady=(0, 10), sticky="nsew")
         entry_id.focus_set()
 
         Instrucciones = tk.Label(frame,
@@ -2260,12 +2256,12 @@ class TestingGTSOC:
                                  wraplength=1000,  # salto de línea automático
                                  anchor="center",
                                  justify="center")
-        Instrucciones.grid(row=3, column=0, columnspan=3, pady=10, padx=0)
+        Instrucciones.grid(row=3, column=0, columnspan=4, pady=10, padx=0)
 
         label_id = tk.Label(frame, text="", font=(
             "Arial", 12, "bold"), fg="black")
         label_id.grid(row=4, column=0, columnspan=2,
-                      pady=0, padx=0, sticky="w")
+                      pady=0, padx=0, sticky="nsew")
 
         test_1_name = testspec_gtsoc("UTIL_3V3_Ohm", "Name")
         test_1_unit = testspec_gtsoc("UTIL_3V3_Ohm", "Unit")
@@ -2403,151 +2399,152 @@ class TestingGTSOC:
         label_test1 = tk.Label(frame, text=f"Test 1: {test_1_name} - Min: {test_1_min} {test_1_unit}, Max: {test_1_max} {test_1_unit}", font=(
             "Arial", 12), fg="black")
         label_test1.grid(row=5, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test2 = tk.Label(frame, text=f"Test 2: {test_2_name} - Min: {test_2_min} {test_2_unit}, Max: {test_2_max} {test_2_unit}", font=(
             "Arial", 12), fg="black")
         label_test2.grid(row=6, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test3 = tk.Label(frame, text=f"Test 3: {test_3_name} - Min: {test_3_min} {test_3_unit}, Max: {test_3_max} {test_3_unit}", font=(
             "Arial", 12), fg="black")
         label_test3.grid(row=7, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test4 = tk.Label(frame, text=f"Test 4: {test_4_name} - Min: {test_4_min} {test_4_unit}, Max: {test_4_max} {test_4_unit}", font=(
             "Arial", 12), fg="black")
         label_test4.grid(row=8, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test5 = tk.Label(frame, text=f"Test 5: {test_5_name} - Min: {test_5_min} {test_5_unit}, Max: {test_5_max} {test_5_unit}", font=(
             "Arial", 12), fg="black")
         label_test5.grid(row=9, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test6 = tk.Label(frame, text=f"Test 6: {test_6_name} - Min: {test_6_min} {test_6_unit}, Max: {test_6_max} {test_6_unit}", font=(
             "Arial", 12), fg="black")
         label_test6.grid(row=10, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test7 = tk.Label(frame, text=f"Test 7: {test_7_name} - Min: {test_7_min} {test_7_unit}, Max: {test_7_max} {test_7_unit}", font=(
             "Arial", 12), fg="black")
         label_test7.grid(row=11, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test8 = tk.Label(frame, text=f"Test 8: {test_8_name} - Min: {test_8_min} {test_8_unit}, Max: {test_8_max} {test_8_unit}", font=(
             "Arial", 12), fg="black")
         label_test8.grid(row=12, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test9 = tk.Label(frame, text=f"Test 9: {test_9_name} - Min: {test_9_min} {test_9_unit}, Max: {test_9_max} {test_9_unit}", font=(
             "Arial", 12), fg="black")
         label_test9.grid(row=13, column=0, columnspan=2,
-                         pady=0, padx=0, sticky="w")
+                         pady=0, padx=0, sticky="nsew")
 
         label_test10 = tk.Label(frame, text=f"Test 10: {test_10_name} - Min: {test_10_min} {test_10_unit}, Max: {test_10_max} {test_10_unit}", font=(
             "Arial", 12), fg="black")
         label_test10.grid(row=14, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test11 = tk.Label(frame, text=f"Test 11: {test_11_name} - Min: {test_11_min} {test_11_unit}, Max: {test_11_max} {test_11_unit}", font=(
             "Arial", 12), fg="black")
         label_test11.grid(row=15, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test12 = tk.Label(frame, text=f"Test 12: {test_12_name} - Min: {test_12_min} {test_12_unit}, Max: {test_12_max} {test_12_unit}", font=(
             "Arial", 12), fg="black")
         label_test12.grid(row=16, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test13 = tk.Label(frame, text=f"Test 13: {test_13_name} - Min: {test_13_min} {test_13_unit}, Max: {test_13_max} {test_13_unit}", font=(
             "Arial", 12), fg="black")
         label_test13.grid(row=17, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_short_test = tk.Label(frame, text=f"Short Test: Voltage: {testspec_gtsoc('Short_Test', 'Voltage')} V, Current: {testspec_gtsoc('Short_Test', 'Current')} A", font=(
             "Arial", 12), fg="black")
         label_short_test.grid(row=18, column=0, columnspan=2,
-                              pady=0, padx=0, sticky="w")
+                              pady=0, padx=0, sticky="nsew")
 
         label_test14 = tk.Label(frame, text=f"Test 14: {test_14_name} - Min: {test_14_min} {test_14_unit}, Max: {test_14_max} {test_14_unit}", font=(
             "Arial", 12), fg="black")
         label_test14.grid(row=19, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test15 = tk.Label(frame, text=f"Test 15: {test_15_name} - Min: {test_15_min} {test_15_unit}, Max: {test_15_max} {test_15_unit}", font=(
             "Arial", 12), fg="black")
         label_test15.grid(row=20, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test16 = tk.Label(frame, text=f"Test 16: {test_16_name} - Min: {test_16_min} {test_16_unit}, Max: {test_16_max} {test_16_unit}", font=(
             "Arial", 12), fg="black")
         label_test16.grid(row=21, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test17 = tk.Label(frame, text=f"Test 17: {test_17_name} - Min: {test_17_min} {test_17_unit}, Max: {test_17_max} {test_17_unit}", font=(
             "Arial", 12), fg="black")
         label_test17.grid(row=22, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test18 = tk.Label(frame, text=f"Test 18: {test_18_name} - Min: {test_18_min} {test_18_unit}, Max: {test_18_max} {test_18_unit}", font=(
             "Arial", 12), fg="black")
         label_test18.grid(row=23, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test19 = tk.Label(frame, text=f"Test 19: {test_19_name} - Min: {test_19_min} {test_19_unit}, Max: {test_19_max} {test_19_unit}", font=(
             "Arial", 12), fg="black")
         label_test19.grid(row=24, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test20 = tk.Label(frame, text=f"Test 20: {test_20_name} - Min: {test_20_min} {test_20_unit}, Max: {test_20_max} {test_20_unit}", font=(
             "Arial", 12), fg="black")
         label_test20.grid(row=25, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test21 = tk.Label(frame, text=f"Test 21: {test_21_name} - Min: {test_21_min} {test_21_unit}, Max: {test_21_max} {test_21_unit}", font=(
             "Arial", 12), fg="black")
         label_test21.grid(row=26, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test22 = tk.Label(frame, text=f"Test 22: {test_22_name} - Min: {test_22_min} {test_22_unit}, Max: {test_22_max} {test_22_unit}", font=(
             "Arial", 12), fg="black")
         label_test22.grid(row=27, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test23 = tk.Label(frame, text=f"Test 23: {test_23_name} - Min: {test_23_min} {test_23_unit}, Max: {test_23_max} {test_23_unit}", font=(
             "Arial", 12), fg="black")
         label_test23.grid(row=28, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test24 = tk.Label(frame, text=f"Test 24: {test_24_name} - Min: {test_24_min} {test_24_unit}, Max: {test_24_max} {test_24_unit}", font=(
             "Arial", 12), fg="black")
         label_test24.grid(row=29, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test25 = tk.Label(frame, text=f"Test 25: {test_25_name} - Min: {test_25_min} {test_25_unit}, Max: {test_25_max} {test_25_unit}", font=(
             "Arial", 12), fg="black")
         label_test25.grid(row=30, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
+                          pady=0, padx=0, sticky="nsew")
 
         label_test26 = tk.Label(frame, text=f"Test 26: {test_26_name} - Min: {test_26_min} {test_26_unit}, Max: {test_26_max} {test_26_unit}", font=(
             "Arial", 12), fg="black")
         label_test26.grid(row=31, column=0, columnspan=2,
-                          pady=0, padx=0, sticky="w")
-
-        label_resultado = tk.Label(frame, text="", font=(
-            "Arial", 20), fg="black")
-        label_resultado.grid(row=32, column=0, columnspan=2,
-                             pady=10, padx=0, sticky="nsew")
+                          pady=0, padx=0, sticky="nsew")
 
         imagen = Image.open("GTSOC.png")
-        imagen = imagen.resize((600, 500))
+        imagen = imagen.resize((700, 400))
         foto = ImageTk.PhotoImage(imagen)
 
         label_image_gtsoc = tk.Label(frame, image=foto)
         label_image_gtsoc.image = foto
-        label_image_gtsoc.grid(row=4, column=2, columnspan=2, rowspan=34,
-                               pady=0, padx=0, sticky="e")
+        label_image_gtsoc.grid(row=4, column=2, columnspan=2, rowspan=28,pady=0, padx=0, sticky="e")
+
+        label_resultado = tk.Label(frame, text="", font=(
+            "Arial", 30), fg="black")
+        label_resultado.grid(row=32, column=0, columnspan=4,
+                             pady=10, padx=0, sticky="nsew")
+
+
 
         def reiniciar_prueba():
             """Reinicia la prueba"""
@@ -2638,12 +2635,7 @@ class TestingGTSOC:
             )
             label_resultado.config(text="", bg="SystemButtonFace", fg="black")
 
-        tk.Button(
-            root,
-            text="Reiniciar Prueba", font=("Arial", 10, "bold"), bg="#BFBFBF", fg="black",
-            command=reiniciar_prueba
-        ).grid(row=33, column=0, columnspan=3,
-               pady=(0, 10), padx=50, sticky="nsew")
+        
 
         def validar_id(event=None):
             reiniciar_prueba()
@@ -2655,7 +2647,7 @@ class TestingGTSOC:
                 )
                 return
 
-            if len(id_value) == 16 and id_value[:6] == str(modelo).strip():
+            if len(id_value) == 21 and id_value[:6] == str(modelo).strip():
                 label_id.config(
                     text=f"{id_value}", bg="#C6EFCE", fg="green")
                 entry_id.delete(0, tk.END)
