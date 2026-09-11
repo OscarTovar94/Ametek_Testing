@@ -500,6 +500,8 @@ class TestingGTAO:
         test_16_min = float(testspec_gtao("FPGA_MgtAVcc_Voltage", "Min"))
         test_16_max = float(testspec_gtao("FPGA_MgtAVcc_Voltage", "Max"))
 
+        continue_test = obtener_configuracion("TEST", "Continue")
+
         label_test1 = tk.Label(frame, text=f"Test 1: {test_1_name} - Min: {test_1_min} {test_1_unit}, Max: {test_1_max} {test_1_unit}", font=(
             "Arial", 12), fg="black")
         label_test1.grid(row=5, column=0, columnspan=2,
@@ -781,7 +783,10 @@ class TestingGTAO:
                         fg="red"
                     )
 
-                    test_fail()
+                    if continue_test:
+                        test_2_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -849,7 +854,10 @@ class TestingGTAO:
                         text=f"Test 2: {test_2_name} - Min: {test_2_min} {test_2_unit}, Max: {test_2_max} {test_2_unit} - Result: FAIL ({resultado:.4f} {test_2_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_3_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -940,7 +948,10 @@ class TestingGTAO:
                         fg="red"
                     )
 
-                    test_fail()
+                    if continue_test:
+                        test_4_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1020,7 +1031,10 @@ class TestingGTAO:
                         text=f"Test 4: {test_4_name} - Min: {test_4_min} {test_4_unit}, Max: {test_4_max} {test_4_unit} - Result: FAIL ({resultado:.4f} {test_4_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_5_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1100,7 +1114,10 @@ class TestingGTAO:
                         text=f"Test 5: {test_5_name} - Min: {test_5_min} {test_5_unit}, Max: {test_5_max} {test_5_unit} - Result: FAIL ({resultado:.4f} {test_5_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_6_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1180,8 +1197,10 @@ class TestingGTAO:
                         text=f"Test 6: {test_6_name} - Min: {test_6_min} {test_6_unit}, Max: {test_6_max} {test_6_unit} - Result: FAIL ({resultado:.4f} {test_6_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_7_gtao()  # skip prueba
-                    # test_fail()
+                    if continue_test:
+                        test_7_gtao()  # skip prueba
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1261,8 +1280,10 @@ class TestingGTAO:
                         text=f"Test 7: {test_7_name} - Min: {test_7_min} {test_7_unit}, Max: {test_7_max} {test_7_unit} - Result: FAIL ({resultado:.4f} {test_7_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_8_gtao()  # Skip prueba
-                    # test_fail()
+                    if continue_test:
+                        test_8_gtao()  # Skip prueba
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1342,8 +1363,10 @@ class TestingGTAO:
                         text=f"Test 8: {test_8_name} - Min: {test_8_min} {test_8_unit}, Max: {test_8_max} {test_8_unit} - Result: FAIL ({resultado:.4f} {test_8_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    # test_fail() #Skip prueba
-                    test_9_gtao()
+                    if continue_test:
+                        test_9_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1423,8 +1446,10 @@ class TestingGTAO:
                         text=f"Test 9: {test_9_name} - Min: {test_9_min} {test_9_unit}, Max: {test_9_max} {test_9_unit} - Result: FAIL ({resultado:.4f} {test_9_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    # test_fail() #Skip prueba
-                    conexion_pcba()
+                    if continue_test:
+                        conexion_pcba()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -1637,7 +1662,10 @@ class TestingGTAO:
                         text=f"Test 10: {test_10_name} - Min: {test_10_min} {test_10_unit}, Max: {test_10_max} {test_10_unit} - Result: FAIL ({resultado:.4f} {test_10_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_11_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_10, CANAL_START)
 
@@ -1699,7 +1727,10 @@ class TestingGTAO:
                         text=f"Test 11: {test_11_name} - Min: {test_11_min} {test_11_unit}, Max: {test_11_max} {test_11_unit} - Result: FAIL ({resultado:.4f} {test_11_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_12_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_11, CANAL_START)
 
@@ -1761,7 +1792,10 @@ class TestingGTAO:
                         text=f"Test 12: {test_12_name} - Min: {test_12_min} {test_12_unit}, Max: {test_12_max} {test_12_unit} - Result: FAIL ({resultado:.4f} {test_12_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_13_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_12, CANAL_START)
 
@@ -1823,7 +1857,10 @@ class TestingGTAO:
                         text=f"Test 13: {test_13_name} - Min: {test_13_min} {test_13_unit}, Max: {test_13_max} {test_13_unit} - Result: FAIL ({resultado:.4f} {test_13_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_14_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_13, CANAL_START)
 
@@ -1885,7 +1922,10 @@ class TestingGTAO:
                         text=f"Test 14: {test_14_name} - Min: {test_14_min} {test_14_unit}, Max: {test_14_max} {test_14_unit} - Result: FAIL ({resultado:.4f} {test_14_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_15_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_14, CANAL_START)
 
@@ -1947,7 +1987,10 @@ class TestingGTAO:
                         text=f"Test 15: {test_15_name} - Min: {test_15_min} {test_15_unit}, Max: {test_15_max} {test_15_unit} - Result: FAIL ({resultado:.4f} {test_15_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_16_gtao()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_15, CANAL_START)
 
@@ -2353,6 +2396,8 @@ class TestingGTSOC:
         test_26_min = float(testspec_gtsoc("DDR4_VTT_Voltage", "Min"))
         test_26_max = float(testspec_gtsoc("DDR4_VTT_Voltage", "Max"))
 
+        continue_test = obtener_configuracion("TEST", "Continue")
+
         label_test1 = tk.Label(frame, text=f"Test 1: {test_1_name} - Min: {test_1_min} {test_1_unit}, Max: {test_1_max} {test_1_unit}", font=(
             "Arial", 12), fg="black")
         label_test1.grid(row=5, column=0, columnspan=2,
@@ -2710,7 +2755,10 @@ class TestingGTSOC:
                         text=f"Test 1: {test_1_name} - Min: {test_1_min} {test_1_unit}, Max: {test_1_max} {test_1_unit} - Result: FAIL ({resultado:.4f} {test_1_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_2_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -2778,7 +2826,10 @@ class TestingGTSOC:
                         text=f"Test 2: {test_2_name} - Min: {test_2_min} {test_2_unit}, Max: {test_2_max} {test_2_unit} - Result: FAIL ({resultado:.4f} {test_2_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_3_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_2, CANAL_START)
 
@@ -2838,7 +2889,10 @@ class TestingGTSOC:
                         text=f"Test 3: {test_3_name} - Min: {test_3_min} {test_3_unit}, Max: {test_3_max} {test_3_unit} - Result: FAIL ({resultado:.4f} {test_3_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_4_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(
                 root,
@@ -2907,7 +2961,10 @@ class TestingGTSOC:
                         text=f"Test 4: {test_4_name} - Min: {test_4_min} {test_4_unit}, Max: {test_4_max} {test_4_unit} - Result: FAIL ({resultado:.4f} {test_4_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_5_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_4, CANAL_START)
 
@@ -2972,7 +3029,10 @@ class TestingGTSOC:
                         text=f"Test 5: {test_5_name} - Min: {test_5_min} {test_5_unit}, Max: {test_5_max} {test_5_unit} - Result: FAIL ({resultado:.4f} {test_5_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_6_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_5, CANAL_START)
 
@@ -3039,7 +3099,10 @@ class TestingGTSOC:
                         text=f"Test 6: {test_6_name} - Min: {test_6_min} {test_6_unit}, Max: {test_6_max} {test_6_unit} - Result: FAIL ({resultado:.4f} {test_6_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_7_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_6, CANAL_START)
 
@@ -3105,7 +3168,10 @@ class TestingGTSOC:
                         text=f"Test 7: {test_7_name} - Min: {test_7_min} {test_7_unit}, Max: {test_7_max} {test_7_unit} - Result: FAIL ({resultado:.4f} {test_7_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_8_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_7, CANAL_START)
 
@@ -3169,7 +3235,10 @@ class TestingGTSOC:
                         text=f"Test 8: {test_8_name} - Min: {test_8_min} {test_8_unit}, Max: {test_8_max} {test_8_unit} - Result: FAIL ({resultado:.4f} {test_8_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_9_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_8, CANAL_START)
 
@@ -3234,7 +3303,10 @@ class TestingGTSOC:
                         text=f"Test 9: {test_9_name} - Min: {test_9_min} {test_9_unit}, Max: {test_9_max} {test_9_unit} - Result: FAIL ({resultado:.4f} {test_9_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_10_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_9, CANAL_START)
 
@@ -3299,7 +3371,10 @@ class TestingGTSOC:
                         text=f"Test 10: {test_10_name} - Min: {test_10_min} {test_10_unit}, Max: {test_10_max} {test_10_unit} - Result: FAIL ({resultado:.4f} {test_10_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_11_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_10, CANAL_START)
 
@@ -3363,7 +3438,10 @@ class TestingGTSOC:
                         text=f"Test 11: {test_11_name} - Min: {test_11_min} {test_11_unit}, Max: {test_11_max} {test_11_unit} - Result: FAIL ({resultado:.4f} {test_11_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_12_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_11, CANAL_START)
 
@@ -3427,7 +3505,10 @@ class TestingGTSOC:
                         text=f"Test 12: {test_12_name} - Min: {test_12_min} {test_12_unit}, Max: {test_12_max} {test_12_unit} - Result: FAIL ({resultado:.4f} {test_12_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_13_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_12, CANAL_START)
 
@@ -3492,7 +3573,10 @@ class TestingGTSOC:
                         text=f"Test 13: {test_13_name} - Min: {test_13_min} {test_13_unit}, Max: {test_13_max} {test_13_unit} - Result: FAIL ({resultado:.4f} {test_13_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        conexion_pcba()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_13, CANAL_START)
 
@@ -3703,7 +3787,10 @@ class TestingGTSOC:
                         text=f"Test 14: {test_14_name} - Min: {test_14_min} {test_14_unit}, Max: {test_14_max} {test_14_unit} - Result: FAIL ({resultado:.4f} {test_14_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_15_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_14, CANAL_START)
 
@@ -3763,7 +3850,10 @@ class TestingGTSOC:
                         text=f"Test 15: {test_15_name} - Min: {test_15_min} {test_15_unit}, Max: {test_15_max} {test_15_unit} - Result: FAIL ({resultado:.4f} {test_15_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_16_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_15, CANAL_START)
 
@@ -3822,7 +3912,10 @@ class TestingGTSOC:
                         text=f"Test 16: {test_16_name} - Min: {test_16_min} {test_16_unit}, Max: {test_16_max} {test_16_unit} - Result: FAIL ({resultado:.4f} {test_16_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_17_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_16, CANAL_START)
 
@@ -3881,7 +3974,10 @@ class TestingGTSOC:
                         text=f"Test 17: {test_17_name} - Min: {test_17_min} {test_17_unit}, Max: {test_17_max} {test_17_unit} - Result: FAIL ({resultado:.4f} {test_17_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_18_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_17, CANAL_START)
 
@@ -3940,7 +4036,10 @@ class TestingGTSOC:
                         text=f"Test 18: {test_18_name} - Min: {test_18_min} {test_18_unit}, Max: {test_18_max} {test_18_unit} - Result: FAIL ({resultado:.4f} {test_18_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_19_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_18, CANAL_START)
 
@@ -3999,7 +4098,10 @@ class TestingGTSOC:
                         text=f"Test 19: {test_19_name} - Min: {test_19_min} {test_19_unit}, Max: {test_19_max} {test_19_unit} - Result: FAIL ({resultado:.4f} {test_19_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_20_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_19, CANAL_START)
 
@@ -4058,7 +4160,10 @@ class TestingGTSOC:
                         text=f"Test 20: {test_20_name} - Min: {test_20_min} {test_20_unit}, Max: {test_20_max} {test_20_unit} - Result: FAIL ({resultado:.4f} {test_20_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_21_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_20, CANAL_START)
 
@@ -4117,7 +4222,10 @@ class TestingGTSOC:
                         text=f"Test 21: {test_21_name} - Min: {test_21_min} {test_21_unit}, Max: {test_21_max} {test_21_unit} - Result: FAIL ({resultado:.4f} {test_21_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_22_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_21, CANAL_START)
 
@@ -4176,7 +4284,10 @@ class TestingGTSOC:
                         text=f"Test 22: {test_22_name} - Min: {test_22_min} {test_22_unit}, Max: {test_22_max} {test_22_unit} - Result: FAIL ({resultado:.4f} {test_22_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_23_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_22, CANAL_START)
 
@@ -4235,7 +4346,10 @@ class TestingGTSOC:
                         text=f"Test 23: {test_23_name} - Min: {test_23_min} {test_23_unit}, Max: {test_23_max} {test_23_unit} - Result: FAIL ({resultado:.4f} {test_23_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_24_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_23, CANAL_START)
 
@@ -4294,7 +4408,10 @@ class TestingGTSOC:
                         text=f"Test 24: {test_24_name} - Min: {test_24_min} {test_24_unit}, Max: {test_24_max} {test_24_unit} - Result: FAIL ({resultado:.4f} {test_24_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_25_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_24, CANAL_START)
 
@@ -4353,7 +4470,10 @@ class TestingGTSOC:
                         text=f"Test 25: {test_25_name} - Min: {test_25_min} {test_25_unit}, Max: {test_25_max} {test_25_unit} - Result: FAIL ({resultado:.4f} {test_25_unit})",
                         bg="#FFC7CE", fg="red"
                     )
-                    test_fail()
+                    if continue_test:
+                        test_26_gtsoc()
+                    else:
+                        test_fail()
 
             esperar_entrada_daq(root, inicio_test_25, CANAL_START)
 
